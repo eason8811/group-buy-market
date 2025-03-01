@@ -2,8 +2,8 @@ package xin.eason.infrastructure.dao.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import xin.eason.domain.xxx.model.valobj.DiscountType;
-import xin.eason.domain.xxx.model.valobj.MarketPlan;
+import xin.eason.domain.activity.model.valobj.DiscountType;
+import xin.eason.domain.activity.model.valobj.MarketPlan;
 
 /**
  * 拼团活动折扣表

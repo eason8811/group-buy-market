@@ -2,8 +2,8 @@ package xin.eason.infrastructure.dao.po;
 
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import xin.eason.domain.xxx.model.valobj.ActivityStatus;
-import xin.eason.domain.xxx.model.valobj.GroupType;
+import xin.eason.domain.activity.model.valobj.ActivityStatus;
+import xin.eason.domain.activity.model.valobj.GroupType;
 
 import java.time.LocalDateTime;
 
