@@ -21,7 +21,7 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
      * @throws Exception 抛出所有错误
      */
     @Override
-    public TrailResultEntity apply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+    public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         return null;
     }
 

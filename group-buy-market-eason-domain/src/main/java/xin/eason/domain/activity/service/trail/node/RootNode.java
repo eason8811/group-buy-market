@@ -14,15 +14,14 @@ import xin.eason.types.design.framework.tree.StrategyHandler;
 public class RootNode extends AbstractGroupBuyMarketSupport {
 
     /**
-     * 处理当前节点具体逻辑
+     * 抽象方法, 用于处理实际的策略逻辑
      *
      * @param requestParam   入参
      * @param dynamicContext 动态上下文
      * @return 出参
-     * @throws Exception 抛出所有错误
      */
     @Override
-    public TrailResultEntity apply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+    protected TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         return null;
     }
 
