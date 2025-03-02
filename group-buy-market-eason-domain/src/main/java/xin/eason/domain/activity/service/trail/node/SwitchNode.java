@@ -1,5 +1,6 @@
 package xin.eason.domain.activity.service.trail.node;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import xin.eason.domain.activity.model.entity.MarketProductEntity;
 import xin.eason.domain.activity.model.entity.TrailResultEntity;
@@ -11,7 +12,14 @@ import xin.eason.types.design.framework.tree.StrategyHandler;
  * 规则树开关节点
  */
 @Component
+@RequiredArgsConstructor
 public class SwitchNode extends AbstractGroupBuyMarketSupport {
+
+    /**
+     * 营销节点
+     */
+    private final MarketNode marketNode;
+
     /**
      * 处理当前节点具体逻辑
      *
@@ -22,19 +30,19 @@ public class SwitchNode extends AbstractGroupBuyMarketSupport {
      */
     @Override
     public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        return null;
+        return router(requestParam, dynamicContext);
     }
 
     /**
-     * 获取下一节点的策略处理器 StrategyHandler
+     * 获取下一节点的策略处理器 {@link StrategyHandler}
      *
      * @param requestParam   入参
      * @param dynamicContext 动态上下文
-     * @return 返回下一节点的策略处理器 StrategyHandler
+     * @return 下一节点的 {@link MarketNode} 节点对象
      * @throws Exception 抛出所有错误
      */
     @Override
     public StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> get(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        return null;
+        return marketNode;
     }
 }

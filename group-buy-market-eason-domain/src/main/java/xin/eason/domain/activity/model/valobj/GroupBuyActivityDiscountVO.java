@@ -1,23 +1,20 @@
-package xin.eason.infrastructure.dao.po;
+package xin.eason.domain.activity.model.valobj;
 
-import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import xin.eason.domain.activity.model.valobj.ActivityStatus;
-import xin.eason.domain.activity.model.valobj.GroupType;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
 /**
- * 拼团活动表
- * <p>用于存放不同的拼团活动</p>
+ * 拼团活动及其对应折扣的值对象
  */
 @Data
-@TableName("group_buy_activity")
-public class GroupBuyActivityPO {
-    /**
-     * 主键 ID
-     */
-    private Long id;
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+public class GroupBuyActivityDiscountVO {
     /**
      * 活动ID
      */
@@ -39,9 +36,9 @@ public class GroupBuyActivityPO {
      */
     private String goodsId;
     /**
-     * 折扣 ID 用于关联折扣条目, 折扣条目中存有具体的折扣方式, 折扣公式等
+     * <b>折扣对象</b>
      */
-    private String discountId;
+    private GroupBuyDiscount groupBuyDiscount;
     /**
      * 方式 ( 0, 自动成团 ) ( 1, 达成目标拼团 )
      */
@@ -78,12 +75,36 @@ public class GroupBuyActivityPO {
      * 人群标签规则范围 多选: ( 1, 可见限制 ) ( 2, 参与限制 )
      */
     private String tagScope;
-    /**
-     * 创建时间
-     */
-    private LocalDateTime createTime;
-    /**
-     * 更新时间
-     */
-    private LocalDateTime updateTime;
+
+    @Data
+    @Builder
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class GroupBuyDiscount {
+        /**
+         * 折扣标题
+         */
+        private String discountName;
+        /**
+         * 折扣描述
+         */
+        private String discountDesc;
+        /**
+         * 折扣类型 ( 0, base ) ( 1, tag )
+         * <p>基础类型 (对所有人群都有用), tag类型(对特定人群标签的人群有用)</p>
+         */
+        private DiscountType discountType;
+        /**
+         * 营销优惠计划 ( ZJ, 直减 ) ( MJ, 满减 ) ( N, N元购 )
+         */
+        private MarketPlan marketPlan;
+        /**
+         * 营销优惠表达式
+         */
+        private String marketExpr;
+        /**
+         * 人群标签
+         */
+        private String tagId;
+    }
 }

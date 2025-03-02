@@ -9,9 +9,9 @@ package xin.eason.types.design.framework.tree;
 public interface StrategyHandler<T, D, R> {
 
     /**
-     * <p>为当前接口的 apply 函数提供一个默认实现</p>
-     * <p>DEFAULT 为一个 StrategyHandler 接口的实现类对象</p>
-     * <p>内部有 apply 方法, 方法返回值固定为 null</p>
+     * <p>为当前接口的 {@link #apply} 函数提供一个默认实现</p>
+     * <p>DEFAULT 为一个 {@link StrategyHandler} 接口的实现类对象</p>
+     * <p>内部有 {@link #apply} 方法, 方法返回值固定为 null</p>
      */
     StrategyHandler DEFAULT = (requestParam, dynamicContext) -> null;
 

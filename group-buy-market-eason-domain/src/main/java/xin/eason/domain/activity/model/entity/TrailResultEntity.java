@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,9 +29,9 @@ public class TrailResultEntity {
     /** 拼团目标数量 */
     private Integer targetCount;
     /** 拼团开始时间 */
-    private Date startTime;
+    private LocalDateTime startTime;
     /** 拼团结束时间 */
-    private Date endTime;
+    private LocalDateTime endTime;
     /** 是否可见拼团 */
     private Boolean isVisible;
     /** 是否可参与进团 */

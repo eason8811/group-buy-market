@@ -1,5 +1,6 @@
 package xin.eason.infrastructure.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,10 +13,8 @@ import java.time.LocalDateTime;
  * 商品表
  */
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-public class Sku {
+@TableName("sku")
+public class SkuPO {
 
     /** 自增 */
     private Long id;

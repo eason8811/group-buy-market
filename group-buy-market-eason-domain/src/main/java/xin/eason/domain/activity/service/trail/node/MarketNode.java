@@ -1,17 +1,44 @@
 package xin.eason.domain.activity.service.trail.node;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import xin.eason.domain.activity.adapter.repository.IActivityRepository;
 import xin.eason.domain.activity.model.entity.MarketProductEntity;
 import xin.eason.domain.activity.model.entity.TrailResultEntity;
+import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
+import xin.eason.domain.activity.model.valobj.SkuVO;
 import xin.eason.domain.activity.service.trail.AbstractGroupBuyMarketSupport;
 import xin.eason.domain.activity.service.trail.factory.DefaultActivityStrategyFactory;
+import xin.eason.domain.activity.service.trail.thread.QueryGroupBuyActivityDiscountVO;
+import xin.eason.domain.activity.service.trail.thread.QuerySkuVO;
 import xin.eason.types.design.framework.tree.StrategyHandler;
 
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 /**
- * 规则树营销服务节点
+ * <p>规则树营销服务节点</p>
+ * <p>主要做拼团商品的优惠试算</p>
  */
+@Slf4j
 @Component
+@RequiredArgsConstructor
 public class MarketNode extends AbstractGroupBuyMarketSupport {
+    /**
+     * 线程池 用于激活和管理多线程
+     */
+    private final ThreadPoolExecutor threadPoolExecutor;
+    /**
+     * 规则树收尾节点
+     */
+    private final EndNode endNode;
+    /**
+     * 活动 repository 仓储适配器接口
+     */
+    private final IActivityRepository activityRepository;
+
     /**
      * 处理当前节点具体逻辑
      *
@@ -22,19 +49,49 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
      */
     @Override
     public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        return null;
+        log.info("拼团商品优惠试算规则树 -> {}, userId: {}, requestParam: {}", this.getClass().getSimpleName(), requestParam.getUserId(), requestParam);
+
+        // TODO 拼团优惠试算
+
+        return router(requestParam, dynamicContext);
     }
 
     /**
-     * 获取下一节点的策略处理器 StrategyHandler
+     * 多线程加载拼团活动信息, 活动折扣信息
+     * <p>将需要的数据存入动态上下文 {@link DefaultActivityStrategyFactory.DynamicContext}</p>
      *
      * @param requestParam   入参
      * @param dynamicContext 动态上下文
-     * @return 返回下一节点的策略处理器 StrategyHandler
+     */
+    @Override
+    protected void multiThread(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+        // 同时运行两个线程, 确保接口的响应效率
+        // 创建线程 通过 repository 仓储获取拼团活动信息和活动对应的折扣信息
+        QueryGroupBuyActivityDiscountVO queryGroupBuyActivityDiscountVO = new QueryGroupBuyActivityDiscountVO(requestParam.getSource(), requestParam.getChannel(), activityRepository);
+        FutureTask<GroupBuyActivityDiscountVO> activityDiscountVOFutureTask = new FutureTask<>(queryGroupBuyActivityDiscountVO);
+        threadPoolExecutor.execute(activityDiscountVOFutureTask);
+
+        // 创建线程 通过 repository 仓储获取商品信息信息 (日后开发中可能是同步库的获取, 也可能是 HTTP 或 RPC 的访问)
+        QuerySkuVO querySkuVO = new QuerySkuVO(requestParam.getGoodsId(), activityRepository);
+        FutureTask<SkuVO> skuVOFutureTask = new FutureTask<>(querySkuVO);
+        threadPoolExecutor.execute(skuVOFutureTask);
+
+        // 将多线程获取到的所需信息存入动态上下文
+        dynamicContext.setGroupBuyActivityDiscountVO(activityDiscountVOFutureTask.get(10, TimeUnit.SECONDS));
+        dynamicContext.setSkuVO(skuVOFutureTask.get(10, TimeUnit.SECONDS));
+        log.info("拼团商品优惠试算规则树 -> {}, userId: {}, 异步线程加载数据 [GroupBuyActivityDiscountVO, SkuVO] 完成", this.getClass().getSimpleName(), requestParam.getUserId());
+    }
+
+    /**
+     * 获取下一节点的策略处理器 {@link StrategyHandler}
+     *
+     * @param requestParam   入参
+     * @param dynamicContext 动态上下文
+     * @return 下一节点的 {@link EndNode} 节点对象
      * @throws Exception 抛出所有错误
      */
     @Override
     public StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> get(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        return null;
+        return endNode;
     }
 }
