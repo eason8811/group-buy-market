@@ -48,3 +48,10 @@ logging:
 #  level:
 #    root: info
   config: classpath:logback-spring.xml
+
+redis:
+  sdk:
+    config:
+      host: 8.155.26.190
+      port: 6379
+      password: 3220563569_Hyj

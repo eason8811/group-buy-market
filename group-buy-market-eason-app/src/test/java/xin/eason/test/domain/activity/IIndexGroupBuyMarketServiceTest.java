@@ -21,6 +21,7 @@ public class IIndexGroupBuyMarketServiceTest {
 
     @Test
     public void testIndexMarketTrial() throws Exception {
+        long start = System.currentTimeMillis();
         MarketProductEntity marketProductEntity = new MarketProductEntity();
         marketProductEntity.setUserId("xiaofuge");
         marketProductEntity.setSource("s01");
@@ -30,15 +31,33 @@ public class IIndexGroupBuyMarketServiceTest {
         TrailResultEntity trialBalanceEntity = indexGroupBuyMarketService.indexTrail(marketProductEntity);
         log.info("请求参数:{}", JSON.toJSONString(marketProductEntity));
         log.info("返回结果:{}", JSON.toJSONString(trialBalanceEntity));
+        long end = System.currentTimeMillis();
+        log.info("所需时间: {}ms", end - start);
+
+        start = System.currentTimeMillis();
+        marketProductEntity = new MarketProductEntity();
+        marketProductEntity.setUserId("xiaofuge");
+        marketProductEntity.setSource("s01");
+        marketProductEntity.setChannel("c01");
+        marketProductEntity.setGoodsId("9890001");
+
+        trialBalanceEntity = indexGroupBuyMarketService.indexTrail(marketProductEntity);
+        log.info("请求参数:{}", JSON.toJSONString(marketProductEntity));
+        log.info("返回结果:{}", JSON.toJSONString(trialBalanceEntity));
+        end = System.currentTimeMillis();
+        log.info("所需时间: {}ms", end - start);
     }
 
     @Test
     public void testIndexMarketTrialEmpty() throws Exception {
+        long start = System.currentTimeMillis();
         MarketProductEntity marketProductEntity = new MarketProductEntity();
 
         TrailResultEntity trialBalanceEntity = indexGroupBuyMarketService.indexTrail(marketProductEntity);
         log.info("请求参数:{}", JSON.toJSONString(marketProductEntity));
         log.info("返回结果:{}", JSON.toJSONString(trialBalanceEntity));
+        long end = System.currentTimeMillis();
+        log.info("所需时间: {}ms", end - start);
     }
 
 }
