@@ -1,5 +1,6 @@
 package xin.eason.domain.activity.service.trail.node;
 
+import com.alibaba.fastjson.JSON;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -8,12 +9,16 @@ import xin.eason.domain.activity.model.entity.MarketProductEntity;
 import xin.eason.domain.activity.model.entity.TrailResultEntity;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 import xin.eason.domain.activity.model.valobj.SkuVO;
+import xin.eason.domain.activity.service.discount.IDiscountCalculateService;
 import xin.eason.domain.activity.service.trail.AbstractGroupBuyMarketSupport;
 import xin.eason.domain.activity.service.trail.factory.DefaultActivityStrategyFactory;
 import xin.eason.domain.activity.service.trail.thread.QueryGroupBuyActivityDiscountVO;
 import xin.eason.domain.activity.service.trail.thread.QuerySkuVO;
 import xin.eason.types.design.framework.tree.StrategyHandler;
 
+import javax.sql.rowset.serial.SerialException;
+import java.math.BigDecimal;
+import java.util.Map;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -38,6 +43,10 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
      * 活动 repository 仓储适配器接口
      */
     private final IActivityRepository activityRepository;
+    /**
+     * 折扣计算服务的 Map 注入, 可以通过 键(Bean名) 获取对应的接口实现类注入
+     */
+    private final Map<String, IDiscountCalculateService> discountCalculateServiceMap;
 
     /**
      * 处理当前节点具体逻辑
@@ -51,7 +60,19 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
     public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         log.info("拼团商品优惠试算规则树 -> {}, userId: {}, requestParam: {}", this.getClass().getSimpleName(), requestParam.getUserId(), requestParam);
 
-        // TODO 拼团优惠试算
+        // 获取 marketPlan 营销计划对应的实现类对象
+        GroupBuyActivityDiscountVO groupBuyActivityDiscountVO = dynamicContext.getGroupBuyActivityDiscountVO();
+        GroupBuyActivityDiscountVO.GroupBuyDiscount groupBuyDiscount = groupBuyActivityDiscountVO.getGroupBuyDiscount();
+        IDiscountCalculateService discountCalculateService = discountCalculateServiceMap.get(groupBuyDiscount.getMarketPlan().getCode());
+
+        if (discountCalculateService == null) {
+            log.info("不存在 {} 类型的折扣计算服务，支持类型为: {}", groupBuyDiscount.getMarketPlan().getDesc(), JSON.toJSONString(discountCalculateServiceMap.keySet()));
+            throw new SerialException("不存在" + groupBuyDiscount.getMarketPlan().getDesc() + "类型的服务! 支持的类型为: " + JSON.toJSONString(discountCalculateServiceMap.keySet()));
+        }
+        // 计算出折后价格
+        BigDecimal discountPrice = discountCalculateService.calculate(requestParam.getUserId(), dynamicContext.getSkuVO().getOriginalPrice(), groupBuyDiscount);
+        dynamicContext.setDeductionPrice(discountPrice);
+        log.info("折扣计算完成, 原始价格为: {}, 折后价格为: {}", dynamicContext.getSkuVO().getOriginalPrice(), discountPrice);
 
         return router(requestParam, dynamicContext);
     }

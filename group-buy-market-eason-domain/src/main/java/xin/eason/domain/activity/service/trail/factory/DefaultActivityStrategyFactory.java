@@ -9,6 +9,8 @@ import xin.eason.domain.activity.model.valobj.SkuVO;
 import xin.eason.domain.activity.service.trail.node.RootNode;
 import xin.eason.types.design.framework.tree.StrategyHandler;
 
+import java.math.BigDecimal;
+
 /**
  * <p>默认活动策略工厂</p>
  * <p>( 简单工厂模式 )</p>
@@ -47,5 +49,9 @@ public class DefaultActivityStrategyFactory {
          * @see SkuVO
          */
         private SkuVO skuVO;
+        /**
+         * @see TrailResultEntity#deductionPrice
+         */
+        private BigDecimal deductionPrice;
     }
 }

@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum MarketPlan {
     ZJ("ZJ", "直减"),
     MJ("MJ", "满减"),
+    ZK("ZK", "折扣"),
     N("N", "N元购");
 
     @EnumValue
