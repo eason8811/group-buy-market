@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @TableName("crowd_tags_detail")
-public class CrowdTagsDetail {
+public class CrowdTagsDetailPO {
     /**
      * 自增ID
      */
