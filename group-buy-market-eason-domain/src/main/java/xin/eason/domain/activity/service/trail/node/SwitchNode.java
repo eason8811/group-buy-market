@@ -16,9 +16,9 @@ import xin.eason.types.design.framework.tree.StrategyHandler;
 public class SwitchNode extends AbstractGroupBuyMarketSupport {
 
     /**
-     * 营销节点
+     * 规则树人群标签处理节点
      */
-    private final MarketNode marketNode;
+    private final TagNode tagNode;
     /**
      * 处理错误的节点
      */
@@ -49,6 +49,6 @@ public class SwitchNode extends AbstractGroupBuyMarketSupport {
     public StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> get(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         if (dynamicContext.getException() != null)
             return errorNode;
-        return marketNode;
+        return tagNode;
     }
 }

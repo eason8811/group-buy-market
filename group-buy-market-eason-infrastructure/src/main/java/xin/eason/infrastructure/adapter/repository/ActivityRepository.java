@@ -3,6 +3,7 @@ package xin.eason.infrastructure.adapter.repository;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Component;
 import xin.eason.domain.activity.adapter.repository.IActivityRepository;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
@@ -15,6 +16,7 @@ import xin.eason.infrastructure.dao.po.GroupBuyActivityPO;
 import xin.eason.infrastructure.dao.po.GroupBuyDiscountPO;
 import xin.eason.infrastructure.dao.po.SCSkuActivityPO;
 import xin.eason.infrastructure.dao.po.SkuPO;
+import xin.eason.infrastructure.redis.IRedisService;
 import xin.eason.types.exception.NoMarketConfigException;
 
 /**
@@ -40,6 +42,10 @@ public class ActivityRepository implements IActivityRepository {
      * 拼团商品 - 拼团活动表对应 Mapper
      */
     private final ISCSkuActivity skuActivity;
+    /**
+     * Redis 服务
+     */
+    private final IRedisService redisService;
 
     /**
      * 根据 <b>SC</b> 获取 {@link GroupBuyActivityDiscountVO} 拼团活动及其折扣类的对象
@@ -114,5 +120,19 @@ public class ActivityRepository implements IActivityRepository {
                 .goodsName(skuPO.getGoodsName())
                 .originalPrice(skuPO.getOriginalPrice())
                 .build();
+    }
+
+    /**
+     * 根据 tagId 和 userId 在 redis 的位图中判断用户是否在人群范围内
+     *
+     * @param tagId  人群标签 ID
+     * @param userId 用户 ID
+     * @return 是否在人群标签内
+     */
+    @Override
+    public Boolean queryUserInCrowd(String tagId, String userId) {
+        RBitSet bitSet = redisService.getBitSet(tagId);
+        // 是否存在
+        return bitSet.get(redisService.getIndexFromUserId(userId));
     }
 }

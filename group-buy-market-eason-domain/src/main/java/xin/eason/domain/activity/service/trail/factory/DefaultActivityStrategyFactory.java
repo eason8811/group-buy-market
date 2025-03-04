@@ -57,5 +57,13 @@ public class DefaultActivityStrategyFactory {
          * 记录运行中的错误
          */
         private RuntimeException exception;
+        /**
+         * 记录用户是否可以看见这个活动
+         */
+        private Boolean isVisible;
+        /**
+         * 记录用户是否可以参与这个活动
+         */
+        private Boolean isParticipable;
     }
 }

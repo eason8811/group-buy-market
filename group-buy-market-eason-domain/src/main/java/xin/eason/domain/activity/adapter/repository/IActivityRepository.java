@@ -23,4 +23,12 @@ public interface IActivityRepository {
      * @return {@link SkuVO} 商品信息值对象
      */
     SkuVO querySkuVO(String goodsId);
+
+    /**
+     * 根据 tagId 和 userId 在 redis 的位图中判断用户是否在人群范围内
+     * @param tagId 人群标签 ID
+     * @param userId 用户 ID
+     * @return 是否在人群标签内
+     */
+    Boolean queryUserInCrowd(String tagId, String userId);
 }

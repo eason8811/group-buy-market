@@ -33,10 +33,6 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class MarketNode extends AbstractGroupBuyMarketSupport {
     /**
-     * 线程池 用于激活和管理多线程
-     */
-    private final ThreadPoolExecutor threadPoolExecutor;
-    /**
      * 规则树收尾节点
      */
     private final EndNode endNode;
@@ -77,6 +73,7 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
         if (discountCalculateService == null) {
             // 将不存在服务的异常, 存入动态上下文中
             dynamicContext.setException(new ServiceException("不存在" + groupBuyDiscount.getMarketPlan().getDesc() + "类型的服务! 支持的类型为: " + JSON.toJSONString(discountCalculateServiceMap.keySet())));
+            return router(requestParam, dynamicContext);
         }
         // 计算出折后价格
         BigDecimal discountPrice = discountCalculateService.calculate(requestParam.getUserId(), dynamicContext.getSkuVO().getOriginalPrice(), groupBuyDiscount);
@@ -84,38 +81,6 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
         log.info("折扣计算完成, 原始价格为: {}, 折后价格为: {}", dynamicContext.getSkuVO().getOriginalPrice(), discountPrice);
 
         return router(requestParam, dynamicContext);
-    }
-
-    /**
-     * 多线程加载拼团活动信息, 活动折扣信息
-     * <p>将需要的数据存入动态上下文 {@link DefaultActivityStrategyFactory.DynamicContext}</p>
-     *
-     * @param requestParam   入参
-     * @param dynamicContext 动态上下文
-     */
-    @Override
-    protected void multiThread(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
-        // 同时运行两个线程, 确保接口的响应效率
-        // 创建线程 通过 repository 仓储获取拼团活动信息和活动对应的折扣信息
-        QueryGroupBuyActivityDiscountVO queryGroupBuyActivityDiscountVO = new QueryGroupBuyActivityDiscountVO(requestParam.getSource(), requestParam.getChannel(), requestParam.getUserId(), activityRepository);
-        FutureTask<GroupBuyActivityDiscountVO> activityDiscountVOFutureTask = new FutureTask<>(queryGroupBuyActivityDiscountVO);
-        threadPoolExecutor.execute(activityDiscountVOFutureTask);
-
-        // 创建线程 通过 repository 仓储获取商品信息信息 (日后开发中可能是同步库的获取, 也可能是 HTTP 或 RPC 的访问)
-        QuerySkuVO querySkuVO = new QuerySkuVO(requestParam.getGoodsId(), activityRepository);
-        FutureTask<SkuVO> skuVOFutureTask = new FutureTask<>(querySkuVO);
-        threadPoolExecutor.execute(skuVOFutureTask);
-
-        // 将多线程获取到的所需信息存入动态上下文
-        GroupBuyActivityDiscountVO activityDiscountVO = activityDiscountVOFutureTask.get(10, TimeUnit.SECONDS);
-        if (activityDiscountVO == null) {
-            // 若为 null 证明获取配置途中出现 无营销配置异常, 将异常存入动态上下文
-            dynamicContext.setException(new NoMarketConfigException("来源: " + requestParam.getSource() + ", 渠道: " + requestParam.getChannel() + " 无营销配置"));
-            return;
-        }
-        dynamicContext.setGroupBuyActivityDiscountVO(activityDiscountVO);
-        dynamicContext.setSkuVO(skuVOFutureTask.get(10, TimeUnit.SECONDS));
-        log.info("拼团商品优惠试算规则树 -> {}, userId: {}, 异步线程加载数据 [GroupBuyActivityDiscountVO, SkuVO] 完成", this.getClass().getSimpleName(), requestParam.getUserId());
     }
 
     /**

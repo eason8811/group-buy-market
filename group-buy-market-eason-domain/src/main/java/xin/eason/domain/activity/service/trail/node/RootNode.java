@@ -44,6 +44,7 @@ public class RootNode extends AbstractGroupBuyMarketSupport {
         if (StringUtils.isBlank(requestParam.getUserId()) || StringUtils.isBlank(requestParam.getGoodsId()) || StringUtils.isBlank(requestParam.getSource()) || StringUtils.isBlank(requestParam.getChannel())) {
             // 将异常存入动态上下文中
             dynamicContext.setException(new ParamInvalidException("MarketProductEntity 营销产品类对象参数不合法!"));
+            return router(requestParam, dynamicContext);
         }
         return router(requestParam, dynamicContext);
     }

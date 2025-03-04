@@ -10,8 +10,6 @@ import xin.eason.domain.activity.service.trail.AbstractGroupBuyMarketSupport;
 import xin.eason.domain.activity.service.trail.factory.DefaultActivityStrategyFactory;
 import xin.eason.types.design.framework.tree.StrategyHandler;
 
-import java.math.BigDecimal;
-
 /**
  * <p>规则树收尾节点</p>
  * <p>主要做数据组装工作</p>
@@ -40,8 +38,8 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
                 .targetCount(groupBuyActivityDiscountVO.getTarget())
                 .startTime(groupBuyActivityDiscountVO.getStartTime())
                 .endTime(groupBuyActivityDiscountVO.getEndTime())
-                .isVisible(false)
-                .isEnable(false)
+                .isVisible(dynamicContext.getIsVisible())
+                .isEnable(dynamicContext.getIsParticipable())
                 .build();
     }
 

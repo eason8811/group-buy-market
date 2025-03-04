@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 import xin.eason.domain.activity.model.valobj.ActivityStatus;
 import xin.eason.domain.activity.model.valobj.GroupType;
+import xin.eason.domain.activity.model.valobj.TagScope;
 
 import java.time.LocalDateTime;
 
@@ -65,7 +66,7 @@ public class GroupBuyActivityPO {
     /**
      * 人群标签规则范围 多选: ( 1, 可见限制 ) ( 2, 参与限制 )
      */
-    private String tagScope;
+    private TagScope tagScope;
     /**
      * 创建时间
      */

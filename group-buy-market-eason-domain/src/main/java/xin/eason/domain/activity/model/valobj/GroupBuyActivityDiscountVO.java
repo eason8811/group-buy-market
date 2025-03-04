@@ -72,9 +72,9 @@ public class GroupBuyActivityDiscountVO {
      */
     private String tagId;
     /**
-     * 人群标签规则范围 多选: ( 1, 可见限制 ) ( 2, 参与限制 )
+     * 人群标签规则范围 多选: ( 1, 限制可见 ) ( 2, 限制参与 ) ( 3, 限制可见并限制参与 )
      */
-    private String tagScope;
+    private TagScope tagScope;
 
     @Data
     @Builder
@@ -106,5 +106,21 @@ public class GroupBuyActivityDiscountVO {
          * 人群标签
          */
         private String tagId;
+    }
+
+    /**
+     * 判断该活动是否可见
+     * @return 活动可见性
+     */
+    public boolean isVisible() {
+        return !(TagScope.VISIBLE.equals(this.tagScope) || TagScope.VISABLE_PARTICIPABLE.equals(this.tagScope));
+    }
+
+    /**
+     * 判断活动是否能够参与
+     * @return 活动可参与性
+     */
+    public boolean isParticipable() {
+        return !(TagScope.PARTICIPABLE.equals(this.tagScope) || TagScope.VISABLE_PARTICIPABLE.equals(this.tagScope));
     }
 }

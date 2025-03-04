@@ -7,8 +7,9 @@ import lombok.Getter;
 @Getter
 public enum TagScope {
     
-    VISIBLE(1, "可见限制"),
-    PARTICIPABLE(2, "参与限制");
+    VISIBLE(1, "限制可见"),
+    PARTICIPABLE(2, "限制参与"),
+    VISABLE_PARTICIPABLE(3, "限制可见, 限制参与");
 
     @EnumValue
     private final Integer code;
