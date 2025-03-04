@@ -25,8 +25,8 @@ public class IIndexGroupBuyMarketServiceTest {
         MarketProductEntity marketProductEntity = new MarketProductEntity();
         marketProductEntity.setUserId("xiaofuge");
         marketProductEntity.setSource("s01");
-        marketProductEntity.setChannel("c01");
-        marketProductEntity.setGoodsId("9890001");
+        marketProductEntity.setChannel("c02");
+        marketProductEntity.setGoodsId("9890002");
 
         TrailResultEntity trialBalanceEntity = indexGroupBuyMarketService.indexTrail(marketProductEntity);
         log.info("请求参数:{}", JSON.toJSONString(marketProductEntity));

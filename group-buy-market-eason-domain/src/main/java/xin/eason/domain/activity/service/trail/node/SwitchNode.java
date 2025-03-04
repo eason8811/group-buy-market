@@ -19,6 +19,10 @@ public class SwitchNode extends AbstractGroupBuyMarketSupport {
      * 营销节点
      */
     private final MarketNode marketNode;
+    /**
+     * 处理错误的节点
+     */
+    private final ErrorNode errorNode;
 
     /**
      * 处理当前节点具体逻辑
@@ -43,6 +47,8 @@ public class SwitchNode extends AbstractGroupBuyMarketSupport {
      */
     @Override
     public StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> get(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+        if (dynamicContext.getException() != null)
+            return errorNode;
         return marketNode;
     }
 }

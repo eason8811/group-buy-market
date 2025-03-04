@@ -53,5 +53,9 @@ public class DefaultActivityStrategyFactory {
          * @see TrailResultEntity#deductionPrice
          */
         private BigDecimal deductionPrice;
+        /**
+         * 记录运行中的错误
+         */
+        private RuntimeException exception;
     }
 }

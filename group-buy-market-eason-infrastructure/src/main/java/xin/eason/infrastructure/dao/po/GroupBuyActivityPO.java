@@ -27,18 +27,6 @@ public class GroupBuyActivityPO {
      */
     private String activityName;
     /**
-     * 来源 与 channel 组成 SC
-     */
-    private String source;
-    /**
-     * 渠道 与 source 组成 SC
-     */
-    private String channel;
-    /**
-     * 商品 ID
-     */
-    private String goodsId;
-    /**
      * 折扣 ID 用于关联折扣条目, 折扣条目中存有具体的折扣方式, 折扣公式等
      */
     private String discountId;

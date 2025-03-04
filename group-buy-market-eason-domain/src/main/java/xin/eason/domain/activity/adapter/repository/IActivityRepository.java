@@ -12,9 +12,10 @@ public interface IActivityRepository {
      * 根据 <b>SC</b> 获取 {@link GroupBuyActivityDiscountVO} 拼团活动及其折扣类的对象
      * @param source 来源
      * @param channel 渠道
+     * @param goodsId 拼团商品 ID
      * @return 拼团活动及其折扣类的对象
      */
-    GroupBuyActivityDiscountVO queryGroupBuyActivityDiscountVO(String source, String channel);
+    GroupBuyActivityDiscountVO queryGroupBuyActivityDiscountVO(String source, String channel, String goodsId);
 
     /**
      * 根据 ID 获取 {@link SkuVO} 商品信息值对象

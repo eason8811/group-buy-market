@@ -7,6 +7,7 @@ import xin.eason.domain.activity.model.entity.MarketProductEntity;
 import xin.eason.domain.activity.model.entity.TrailResultEntity;
 import xin.eason.domain.activity.service.trail.factory.DefaultActivityStrategyFactory;
 import xin.eason.types.design.framework.tree.StrategyHandler;
+import xin.eason.types.exception.ParamInvalidException;
 
 /**
  * 拼团首页活动领域服务
@@ -14,7 +15,7 @@ import xin.eason.types.design.framework.tree.StrategyHandler;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class IndexGroupBuyMarketService implements IIndexGroupBuyMarketService{
+public class IndexGroupBuyMarketService implements IIndexGroupBuyMarketService {
 
     /**
      * @see DefaultActivityStrategyFactory
@@ -33,8 +34,10 @@ public class IndexGroupBuyMarketService implements IIndexGroupBuyMarketService{
         StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> strategyHandler = defaultActivityStrategyFactory.createStrategyHandler();
         try {
             return strategyHandler.apply(marketProductEntity, new DefaultActivityStrategyFactory.DynamicContext());
-        }
-        catch (Exception e) {
+        } catch (ParamInvalidException e) {
+            log.error("{}", e.getMessage(), e);
+            return new TrailResultEntity();
+        } catch (Exception e) {
             log.error("优惠试算过程错误! ", e);
             return new TrailResultEntity();
         }
