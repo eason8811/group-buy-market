@@ -31,4 +31,17 @@ public interface IActivityRepository {
      * @return 是否在人群标签内
      */
     Boolean queryUserInCrowd(String tagId, String userId);
+
+    /**
+     * 判断服务是否降级
+     * @return 服务降级情况
+     */
+    boolean downGrade();
+
+    /**
+     * 判断服务对该用户是否切量
+     * @param userId 用户 ID
+     * @return 服务切量情况
+     */
+    boolean cutRange(String userId);
 }

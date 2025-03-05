@@ -2,11 +2,14 @@ package xin.eason.domain.activity.service.trail.node;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+import xin.eason.domain.activity.adapter.repository.IActivityRepository;
 import xin.eason.domain.activity.model.entity.MarketProductEntity;
 import xin.eason.domain.activity.model.entity.TrailResultEntity;
 import xin.eason.domain.activity.service.trail.AbstractGroupBuyMarketSupport;
 import xin.eason.domain.activity.service.trail.factory.DefaultActivityStrategyFactory;
 import xin.eason.types.design.framework.tree.StrategyHandler;
+import xin.eason.types.exception.ServiceCutRangeException;
+import xin.eason.types.exception.ServiceDownGradeException;
 
 /**
  * 规则树开关节点
@@ -14,7 +17,10 @@ import xin.eason.types.design.framework.tree.StrategyHandler;
 @Component
 @RequiredArgsConstructor
 public class SwitchNode extends AbstractGroupBuyMarketSupport {
-
+    /**
+     * 活动 repository 仓储适配器接口
+     */
+    private final IActivityRepository activityRepository;
     /**
      * 规则树人群标签处理节点
      */
@@ -34,6 +40,15 @@ public class SwitchNode extends AbstractGroupBuyMarketSupport {
      */
     @Override
     public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+        String userId = requestParam.getUserId();
+        if (activityRepository.downGrade()) {
+            throw new ServiceDownGradeException("拼团活动服务降级拦截! userId: " + userId);
+        }
+
+        if (activityRepository.cutRange(userId)) {
+            throw new ServiceCutRangeException("拼团活动服务切量拦截! userId:" +  userId);
+        }
+
         return router(requestParam, dynamicContext);
     }
 

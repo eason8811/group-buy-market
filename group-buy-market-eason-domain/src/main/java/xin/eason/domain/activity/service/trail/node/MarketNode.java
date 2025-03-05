@@ -41,10 +41,6 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
      */
     private final ErrorNode errorNode;
     /**
-     * 活动 repository 仓储适配器接口
-     */
-    private final IActivityRepository activityRepository;
-    /**
      * 折扣计算服务的 Map 注入, 可以通过 键(Bean名) 获取对应的接口实现类注入
      */
     private final Map<String, IDiscountCalculateService> discountCalculateServiceMap;

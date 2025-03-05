@@ -16,6 +16,7 @@ import xin.eason.infrastructure.dao.po.GroupBuyActivityPO;
 import xin.eason.infrastructure.dao.po.GroupBuyDiscountPO;
 import xin.eason.infrastructure.dao.po.SCSkuActivityPO;
 import xin.eason.infrastructure.dao.po.SkuPO;
+import xin.eason.infrastructure.dcc.DCCService;
 import xin.eason.infrastructure.redis.IRedisService;
 import xin.eason.types.exception.NoMarketConfigException;
 
@@ -46,6 +47,10 @@ public class ActivityRepository implements IActivityRepository {
      * Redis 服务
      */
     private final IRedisService redisService;
+    /**
+     * DCC 动态配置管理服务
+     */
+    private final DCCService dccService;
 
     /**
      * 根据 <b>SC</b> 获取 {@link GroupBuyActivityDiscountVO} 拼团活动及其折扣类的对象
@@ -134,5 +139,26 @@ public class ActivityRepository implements IActivityRepository {
         RBitSet bitSet = redisService.getBitSet(tagId);
         // 是否存在
         return bitSet.get(redisService.getIndexFromUserId(userId));
+    }
+
+    /**
+     * 判断服务是否降级
+     *
+     * @return 服务降级情况
+     */
+    @Override
+    public boolean downGrade() {
+        return dccService.isDownGrade();
+    }
+
+    /**
+     * 判断服务对该用户是否切量
+     *
+     * @param userId 用户 ID
+     * @return 服务切量情况
+     */
+    @Override
+    public boolean cutRange(String userId) {
+        return dccService.isCutRange(userId);
     }
 }
