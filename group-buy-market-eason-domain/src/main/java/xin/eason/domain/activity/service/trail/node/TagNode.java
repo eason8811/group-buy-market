@@ -72,6 +72,7 @@ public class TagNode extends AbstractGroupBuyMarketSupport {
 
         dynamicContext.setIsVisible(userInCrowd || visible);
         dynamicContext.setIsParticipable((userInCrowd || participable) && dynamicContext.getIsVisible());
+        log.info("人群标签限制校验完成, 用户 ID: {} 的用户可见性: {}, 可参与性: {}", requestParam.getUserId(), dynamicContext.getIsVisible(), dynamicContext.getIsParticipable());
         return router(requestParam, dynamicContext);
     }
 
