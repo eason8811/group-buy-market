@@ -38,4 +38,4 @@ build/
 .DS_Store
 /group-buy-market-eason-app/data/log/
 /data/log/
-/.idea/dataSources
+/.idea/
