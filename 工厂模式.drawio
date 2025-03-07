@@ -1,0 +1,561 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36 SLBrowser/9.0.6.2081 SLBChan/10 SLBVPV/64-bit" version="26.0.16">
+  <diagram name="第 1 页" id="JRYn938LkEZfvZY-TwAn">
+    <mxGraphModel dx="1430" dy="770" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="4681" pageHeight="3300" background="#333333" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-170" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=5;" parent="1" vertex="1">
+          <mxGeometry x="2631.62" y="1013" width="1135.38" height="452" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-103" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=5;" parent="1" vertex="1">
+          <mxGeometry x="1695" y="1013" width="877" height="428" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-7" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=5;" parent="1" vertex="1">
+          <mxGeometry x="995" y="1013" width="644" height="330" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-101" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;arcSize=9;" parent="1" vertex="1">
+          <mxGeometry x="2023" y="1058.5" width="505" height="215" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-139" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;dashed=1;" parent="1" vertex="1">
+          <mxGeometry x="2668" y="1153" width="79" height="232" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-1" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;movable=1;resizable=1;rotatable=1;deletable=1;editable=1;locked=0;connectable=1;arcSize=9;" parent="1" vertex="1">
+          <mxGeometry x="1307" y="1058.5" width="304" height="257" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-2" value="&lt;font color=&quot;#f0f3f4&quot;&gt;简单工厂模式&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="995" y="995" width="75" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-3" value="&lt;font color=&quot;#f0f3f4&quot;&gt;工厂方法模式&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1695" y="995" width="75" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-5" value="&lt;font color=&quot;#f0f3f4&quot;&gt;抽象工厂模式&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="2631.62" y="995" width="75" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-12" target="CabvgTx8TlU2bWl-Fr8w-14" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-24" value="&lt;span&gt;生成&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-15" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-12" value="&lt;font color=&quot;#f0f3f4&quot;&gt;case1&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1333" y="1178.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-14" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1333" y="1252.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-27" target="CabvgTx8TlU2bWl-Fr8w-28" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-26" value="&lt;span&gt;生成&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-25" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-27" value="&lt;font color=&quot;#f0f3f4&quot;&gt;case2&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1423" y="1178.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-28" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1423" y="1252.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-29" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-31" target="CabvgTx8TlU2bWl-Fr8w-32" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-30" value="&lt;span&gt;生成&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-29" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-31" value="&lt;font color=&quot;#f0f3f4&quot;&gt;case3&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1513" y="1178.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-32" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1513" y="1252.5" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-33" value="&lt;font color=&quot;#f0f3f4&quot;&gt;Product generate(Object case)&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1333" y="1089.5" width="250" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-35" value="&lt;font color=&quot;#f0f3f4&quot;&gt;用于根据 case 生成不同的 product&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="1395.38" y="1077.5" width="125.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-37" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-33" target="CabvgTx8TlU2bWl-Fr8w-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1776" y="1124.5" as="sourcePoint" />
+            <mxPoint x="1772" y="1306.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-39" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-33" target="CabvgTx8TlU2bWl-Fr8w-27" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1847" y="1103.5" as="sourcePoint" />
+            <mxPoint x="1843" y="1285.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-41" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-33" target="CabvgTx8TlU2bWl-Fr8w-31" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1941" y="1094.5" as="sourcePoint" />
+            <mxPoint x="1937" y="1276.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-42" value="选择" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-41" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-24" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-43" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product接口&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1108" y="1122" width="80" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-44" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1023" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-45" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1113" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-46" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1203" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-47" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-43" target="CabvgTx8TlU2bWl-Fr8w-44" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1068" y="1292" as="sourcePoint" />
+            <mxPoint x="1158" y="1346" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-49" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-43" target="CabvgTx8TlU2bWl-Fr8w-45" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1172" y="1288" as="sourcePoint" />
+            <mxPoint x="1148" y="1215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-51" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-43" target="CabvgTx8TlU2bWl-Fr8w-46" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1303" y="1279" as="sourcePoint" />
+            <mxPoint x="1393" y="1333" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-52" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-51" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-24" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-55" value="&lt;font color=&quot;#f0f3f4&quot;&gt;Prouduct接口用于规范产品的行为&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="1085.38" y="1110" width="125.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-11" value="&lt;font color=&quot;#f0f3f4&quot;&gt;工厂 Factory&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="1307" y="1040.5" width="75" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-58" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Abstract 抽象工厂类&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2213" y="1092.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-59" value="&lt;font color=&quot;#f0f3f4&quot;&gt;可以是抽象类 / 也可以是接口&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2222.37" y="1080.5" width="105.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-60" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product1 工厂&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2049" y="1200.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-61" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product2 工厂&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2214" y="1200.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-62" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门生产 Product1&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2076.38" y="1188.5" width="69.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-63" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门生产 Product2&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2240.37" y="1188.5" width="69.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-64" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product3 工厂&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2379" y="1198.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-65" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门生产 Product3&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2406.38" y="1186.5" width="69.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-67" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-58" target="CabvgTx8TlU2bWl-Fr8w-65" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2357.12" y="1112.5" as="sourcePoint" />
+            <mxPoint x="2447.12" y="1166.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2275" y="1158" />
+              <mxPoint x="2441" y="1158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-69" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-58" target="CabvgTx8TlU2bWl-Fr8w-63" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2200" y="1134.5" as="sourcePoint" />
+            <mxPoint x="2290" y="1188.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-71" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-58" target="CabvgTx8TlU2bWl-Fr8w-62" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2053" y="1118.5" as="sourcePoint" />
+            <mxPoint x="2143" y="1172.5" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2275" y="1158" />
+              <mxPoint x="2111" y="1158" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-72" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-71" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="50" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-73" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;场景1&amp;nbsp; &amp;nbsp;需要Product1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2049" y="1364.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-81" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;场景2&amp;nbsp; &amp;nbsp;需要Product2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2214" y="1364.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-82" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;场景3&amp;nbsp; &amp;nbsp;需要Product3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2379" y="1364.5" width="124" height="38" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-84" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-73" target="CabvgTx8TlU2bWl-Fr8w-60" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2468" y="1414.5" as="sourcePoint" />
+            <mxPoint x="3141" y="1337.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-85" value="调用" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-84" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-1" y="-19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-91" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-81" target="CabvgTx8TlU2bWl-Fr8w-61" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2226" y="1373.5" as="sourcePoint" />
+            <mxPoint x="2226" y="1247.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-92" value="调用" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-91" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-1" y="-19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-93" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.25;entryY=1;entryDx=0;entryDy=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-82" target="CabvgTx8TlU2bWl-Fr8w-64" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2461" y="1368.5" as="sourcePoint" />
+            <mxPoint x="2461" y="1242.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-94" value="调用" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-93" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-1" y="-19" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-95" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-60" target="CabvgTx8TlU2bWl-Fr8w-73" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2045" y="1374.5" as="sourcePoint" />
+            <mxPoint x="2045" y="1248.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-96" value="返回 Product1" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-95" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-97" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-64" target="CabvgTx8TlU2bWl-Fr8w-82" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2398" y="1245.5" as="sourcePoint" />
+            <mxPoint x="2398" y="1371.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-98" value="返回 Product3" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-97" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-99" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.75;entryY=0;entryDx=0;entryDy=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-61" target="CabvgTx8TlU2bWl-Fr8w-81" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2307" y="1253.5" as="sourcePoint" />
+            <mxPoint x="2307" y="1379.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-100" value="返回 Product2" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-99" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint y="20" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-102" value="&lt;font color=&quot;#f0f3f4&quot;&gt;工厂 Factory&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="2023" y="1040.5" width="75" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-104" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product接口&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1817" y="1122" width="80" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-105" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1732" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-106" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1822" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-107" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Product3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="1912" y="1211" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-108" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-104" target="CabvgTx8TlU2bWl-Fr8w-105" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1777" y="1292" as="sourcePoint" />
+            <mxPoint x="1867" y="1346" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-109" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-104" target="CabvgTx8TlU2bWl-Fr8w-106" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1881" y="1288" as="sourcePoint" />
+            <mxPoint x="1857" y="1215" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-110" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-104" target="CabvgTx8TlU2bWl-Fr8w-107" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2012" y="1279" as="sourcePoint" />
+            <mxPoint x="2102" y="1333" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-111" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-110" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-24" y="-16" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-112" value="&lt;font color=&quot;#f0f3f4&quot;&gt;Prouduct接口用于规范产品的行为&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="1794.38" y="1110" width="125.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-113" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone接口&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2758" y="1081" width="80" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-114" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2673" y="1170" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-115" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2763" y="1170" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-116" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2853" y="1170" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-117" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-113" target="CabvgTx8TlU2bWl-Fr8w-114" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2718" y="1251" as="sourcePoint" />
+            <mxPoint x="2808" y="1305" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-118" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-113" target="CabvgTx8TlU2bWl-Fr8w-115" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2822" y="1247" as="sourcePoint" />
+            <mxPoint x="2798" y="1174" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-119" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-113" target="CabvgTx8TlU2bWl-Fr8w-116" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2953" y="1238" as="sourcePoint" />
+            <mxPoint x="3043" y="1292" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-120" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-119" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-24" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-121" value="&lt;font color=&quot;#f0f3f4&quot;&gt;Phone 接口用于规范手机的行为&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2739.19" y="1069" width="117.62" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-122" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;PC接口&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2758" y="1244" width="80" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-123" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;PC1&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2673" y="1333" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-124" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;PC2&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2763" y="1333" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-125" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;PC3&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="2853" y="1333" width="70" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-126" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-122" target="CabvgTx8TlU2bWl-Fr8w-123" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2721" y="1414" as="sourcePoint" />
+            <mxPoint x="2811" y="1468" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-127" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-122" target="CabvgTx8TlU2bWl-Fr8w-124" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2825" y="1410" as="sourcePoint" />
+            <mxPoint x="2801" y="1337" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-128" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-122" target="CabvgTx8TlU2bWl-Fr8w-125" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2956" y="1401" as="sourcePoint" />
+            <mxPoint x="3046" y="1455" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-129" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-128" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-24" y="-15" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-130" value="&lt;font color=&quot;#f0f3f4&quot;&gt;PC 接口用于规范电脑的行为&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2746.09" y="1232" width="103.81" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-131" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=7;" parent="1" vertex="1">
+          <mxGeometry x="3228" y="1058.5" width="233" height="143" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-132" value="&lt;font color=&quot;#f0f3f4&quot;&gt;可以是抽象类 / 也可以是接口&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="3350" y="1046.5" width="105.25" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-133" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Abstract 抽象工厂类&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="3228" y="1040.5" width="114" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-134" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPhone(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="3246" y="1080.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-135" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPC(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;" parent="1" vertex="1">
+          <mxGeometry x="3246" y="1144.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-136" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 Phone 同类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="3288.5" y="1068.5" width="112" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-138" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 PC 同类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="3295.25" y="1132.5" width="98.5" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-141" value="&lt;font color=&quot;#f0f3f4&quot;&gt;同一产品族的产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;" parent="1" vertex="1">
+          <mxGeometry x="2685.38" y="1255.5" width="43" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-142" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=7;container=0;" parent="1" vertex="1">
+          <mxGeometry x="2956" y="1285.5" width="233" height="143" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-144" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;产品族1 工厂类&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="2956" y="1267.5" width="90" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-145" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPhone(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="2974" y="1307.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-146" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPC(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="2974" y="1371.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-147" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 Phone1 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3017.75" y="1295.5" width="108.5" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-148" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 PC1 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3024.62" y="1359.5" width="94.75" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-149" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=7;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3228" y="1285.5" width="233" height="143" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-150" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;产品族2 工厂类&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3228" y="1267.5" width="90" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-151" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPhone(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3246" y="1307.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-152" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPC(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3246" y="1371.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-153" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 Phone2 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3289.75" y="1295.5" width="108.5" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-154" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 PC2 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3296.62" y="1359.5" width="94.75" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-155" value="" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;arcSize=7;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3499" y="1285.5" width="233" height="143" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-156" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;产品族3 工厂类&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3499" y="1267.5" width="90" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-157" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPhone(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3517" y="1307.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-158" value="&lt;span style=&quot;color: rgb(240, 243, 244);&quot;&gt;Phone createPC(Object param)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillStyle=auto;labelBackgroundColor=none;fillColor=light-dark(#333333, #ededed);strokeColor=light-dark(#f0f3f4, #ededed);gradientColor=none;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3517" y="1371.5" width="197" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-159" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 Phone3 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3560.75" y="1295.5" width="108.5" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-160" value="&lt;font color=&quot;#f0f3f4&quot;&gt;专门用于创建 PC3 类产品&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=8;container=0;" parent="1" vertex="1">
+          <mxGeometry x="3567.62" y="1359.5" width="94.75" height="12" as="geometry" />
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-164" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-131" target="CabvgTx8TlU2bWl-Fr8w-155" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2956" y="1151.5" as="sourcePoint" />
+            <mxPoint x="3046" y="1205.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-166" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-131" target="CabvgTx8TlU2bWl-Fr8w-149" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3046" y="1178.5" as="sourcePoint" />
+            <mxPoint x="3136" y="1232.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-168" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;strokeColor=#F0F3F4;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-131" target="CabvgTx8TlU2bWl-Fr8w-142" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3053" y="1111.5" as="sourcePoint" />
+            <mxPoint x="3143" y="1165.5" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-169" value="实现" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-168" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="83" y="-23" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-172" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#6c8ebf;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;fillColor=#dae8fc;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-145" target="CabvgTx8TlU2bWl-Fr8w-114" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3355" y="1212" as="sourcePoint" />
+            <mxPoint x="3083" y="1296" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2939" y="1325" />
+              <mxPoint x="2939" y="1229" />
+              <mxPoint x="2708" y="1229" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-173" value="生产" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-172" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="-21" y="-2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-174" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#6c8ebf;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;fillColor=#dae8fc;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-146" target="CabvgTx8TlU2bWl-Fr8w-123" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2984" y="1335" as="sourcePoint" />
+            <mxPoint x="2718" y="1215" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="2939" y="1389" />
+              <mxPoint x="2939" y="1415" />
+              <mxPoint x="2708" y="1415" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-175" value="生产" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-174" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="32" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-177" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#d6b656;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;fillColor=#fff2cc;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-152" target="CabvgTx8TlU2bWl-Fr8w-124" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="2984" y="1399" as="sourcePoint" />
+            <mxPoint x="2718" y="1378" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3208" y="1389" />
+              <mxPoint x="3208" y="1444" />
+              <mxPoint x="2798" y="1444" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-178" value="生产" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-177" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="78" y="2" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-179" style="edgeStyle=orthogonalEdgeStyle;rounded=1;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;strokeColor=#d6b656;curved=0;endArrow=classicThin;endFill=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;strokeWidth=2;fillColor=#fff2cc;" parent="1" source="CabvgTx8TlU2bWl-Fr8w-151" target="CabvgTx8TlU2bWl-Fr8w-115" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="3256" y="1399" as="sourcePoint" />
+            <mxPoint x="2808" y="1378" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3208" y="1325" />
+              <mxPoint x="3208" y="1218" />
+              <mxPoint x="2798" y="1218" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="CabvgTx8TlU2bWl-Fr8w-180" value="生产" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];labelBackgroundColor=light-dark(#333333, #ededed);fontColor=#F0F3F4;" parent="CabvgTx8TlU2bWl-Fr8w-179" vertex="1" connectable="0">
+          <mxGeometry x="-0.2969" relative="1" as="geometry">
+            <mxPoint x="19" y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
