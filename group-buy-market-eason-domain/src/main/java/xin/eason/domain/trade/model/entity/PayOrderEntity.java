@@ -21,9 +21,13 @@ public class PayOrderEntity {
      */
     private String orderId;
     /**
-     * 折扣后价格
+     * 折扣金额
      */
     private BigDecimal discountPrice;
+    /**
+     * 折扣后价格
+     */
+    private BigDecimal payPrice;
     /**
      * 订单明细状态
      */

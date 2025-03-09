@@ -55,6 +55,8 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
      */
     @Override
     public TrailResultEntity doApply(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
+        BigDecimal originalPrice = dynamicContext.getSkuVO().getOriginalPrice();
+
         log.info("拼团商品优惠试算规则树 -> {}, userId: {}, requestParam: {}", this.getClass().getSimpleName(), requestParam.getUserId(), requestParam);
 
         // 若动态上下文中有异常, 则直接进行路由
@@ -72,9 +74,10 @@ public class MarketNode extends AbstractGroupBuyMarketSupport {
             return router(requestParam, dynamicContext);
         }
         // 计算出折后价格
-        BigDecimal discountPrice = discountCalculateService.calculate(requestParam.getUserId(), dynamicContext.getSkuVO().getOriginalPrice(), groupBuyDiscount);
-        dynamicContext.setDeductionPrice(discountPrice);
-        log.info("折扣计算完成, 原始价格为: {}, 折后价格为: {}", dynamicContext.getSkuVO().getOriginalPrice(), discountPrice);
+        BigDecimal payPrice = discountCalculateService.calculate(requestParam.getUserId(), originalPrice, groupBuyDiscount);
+        dynamicContext.setDeductionPrice(originalPrice.subtract(payPrice));
+        dynamicContext.setPayPrice(payPrice);
+        log.info("折扣计算完成, 原始价格为: {}, 折后价格为: {}, 扣减金额为: {}", originalPrice, payPrice, dynamicContext.getDeductionPrice());
 
         return router(requestParam, dynamicContext);
     }

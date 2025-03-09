@@ -77,6 +77,10 @@ public class GroupBuyOrderListPO {
      */
     private String outTradeNo;
     /**
+     * 业务唯一 ID
+     */
+    private String bizId;
+    /**
      * 创建时间
      */
     private LocalDateTime createTime;

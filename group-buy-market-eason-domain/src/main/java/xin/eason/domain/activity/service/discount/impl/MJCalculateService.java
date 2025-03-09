@@ -2,6 +2,7 @@ package xin.eason.domain.activity.service.discount.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import xin.eason.domain.activity.adapter.repository.IActivityRepository;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 import xin.eason.domain.activity.service.discount.AbstractDiscountCalculate;
 
@@ -10,6 +11,15 @@ import java.math.BigDecimal;
 @Slf4j
 @Service("MJ")
 public class MJCalculateService extends AbstractDiscountCalculate {
+
+    /**
+     * 满减策略构造函数
+     * @param activityRepository 活动 repository 仓储适配器接口
+     */
+    public MJCalculateService(IActivityRepository activityRepository) {
+        super(activityRepository);
+    }
+
     /**
      * 执行实际满减折扣计算
      *

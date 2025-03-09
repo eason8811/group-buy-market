@@ -1,6 +1,7 @@
 package xin.eason.domain.trade.adapter.repository;
 
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
+import xin.eason.domain.trade.model.entity.GroupBuyActivityEntity;
 import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
 
@@ -29,4 +30,19 @@ public interface ITradeRepository {
      * @param groupBuyOrderAggregate 订单聚合
      */
     void lockOrder(GroupBuyOrderAggregate groupBuyOrderAggregate);
+
+    /**
+     * 根据 activityId 获取活动实体对象
+     * @param activityId 活动 ID
+     * @return 活动实体对象
+     */
+    GroupBuyActivityEntity queryActivityByActivityId(Long activityId);
+
+    /**
+     * 根据 activityId 和 userId 获取用户参与一个活动的次数
+     * @param activityId 活动 ID
+     * @param userId 用户 ID
+     * @return 用户参与活动次数
+     */
+    Long queryUserJoinActivityTimes(Long activityId, String userId);
 }

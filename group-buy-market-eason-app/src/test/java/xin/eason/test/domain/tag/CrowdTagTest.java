@@ -1,4 +1,4 @@
-package xin.eason.test.domain.activity;
+package xin.eason.test.domain.tag;
 
 import com.alibaba.fastjson2.JSON;
 import lombok.extern.slf4j.Slf4j;
@@ -26,7 +26,7 @@ public class CrowdTagTest {
     @Autowired
     private IIndexGroupBuyMarketService indexGroupBuyMarketService;
 
-    /*@Test
+    @Test
     public void test_tag_job() {
         tagsService.execTagBatchJob("RQ_KJHKL98UU78H66554GFDV", "10001");
     }
@@ -37,10 +37,10 @@ public class CrowdTagTest {
         // 是否存在
         log.info("xiaofuge 存在，预期结果为 true，测试结果:{}", bitSet.get(redisService.getIndexFromUserId("xiaofuge")));
         log.info("gudebai 不存在，预期结果为 false，测试结果:{}", bitSet.get(redisService.getIndexFromUserId("gudebai")));
-    }*/
+    }
 
     /**
-     * 测试人群标签功能的时候，可以进入 ITagServiceTest#test_tag_job 执行人群写入
+     * 测试人群标签功能的时候，可以进入 {@link CrowdTagTest#test_tag_job} 执行人群写入
      */
     @Test
     public void test_indexMarketTrial() throws Exception {

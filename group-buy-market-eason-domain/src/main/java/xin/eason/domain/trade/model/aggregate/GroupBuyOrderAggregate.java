@@ -31,6 +31,10 @@ public class GroupBuyOrderAggregate {
      */
     private String outerOrderId;
     /**
+     * 参加该活动的次数
+     */
+    private Long joinTimes;
+    /**
      * 拼团订单实体
      */
     private PayOrderEntity payOrderEntity;

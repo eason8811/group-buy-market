@@ -24,14 +24,14 @@ public class TradeServiceTest {
     @Test
     public void test_lockMarketPayOrder() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-        lockMarketPayOrderRequestDTO.setUserId("xiaofuge");
+        lockMarketPayOrderRequestDTO.setUserId("Eason1");
         lockMarketPayOrderRequestDTO.setTeamId(null);
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");
         lockMarketPayOrderRequestDTO.setSource("s01");
         lockMarketPayOrderRequestDTO.setChannel("c01");
-//        lockMarketPayOrderRequestDTO.setOuterOrderId(RandomStringUtils.randomNumeric(12));
-        lockMarketPayOrderRequestDTO.setOuterOrderId("551640666540");
+        lockMarketPayOrderRequestDTO.setOuterOrderId(RandomStringUtils.randomNumeric(12));
+//        lockMarketPayOrderRequestDTO.setOuterOrderId("551640666540");
         Result<LockMarketPayOrderResponseDTO> lockMarketPayOrderResponseDTOResponse = marketTradeController.lockMarketPayOrder(lockMarketPayOrderRequestDTO);
         log.info("测试结果 req:{} res:{}", JSON.toJSONString(lockMarketPayOrderRequestDTO), JSON.toJSONString(lockMarketPayOrderResponseDTOResponse));
     }
@@ -39,15 +39,16 @@ public class TradeServiceTest {
     @Test
     public void test_lockMarketPayOrder_teamId_not_null() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-        lockMarketPayOrderRequestDTO.setUserId("xiaofuge");
-        lockMarketPayOrderRequestDTO.setTeamId("94322404");
+        lockMarketPayOrderRequestDTO.setUserId("Eason2");
+        lockMarketPayOrderRequestDTO.setTeamId("05450613");
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");
         lockMarketPayOrderRequestDTO.setSource("s01");
         lockMarketPayOrderRequestDTO.setChannel("c01");
-//        lockMarketPayOrderRequestDTO.setOuterOrderId(RandomStringUtils.randomNumeric(12));
-        lockMarketPayOrderRequestDTO.setOuterOrderId("551640666540");
+        lockMarketPayOrderRequestDTO.setOuterOrderId(RandomStringUtils.randomNumeric(12));
+//        lockMarketPayOrderRequestDTO.setOuterOrderId("551640666540");
         Result<LockMarketPayOrderResponseDTO> lockMarketPayOrderResponseDTOResponse = marketTradeController.lockMarketPayOrder(lockMarketPayOrderRequestDTO);
         log.info("测试结果 req:{} res:{}", JSON.toJSONString(lockMarketPayOrderRequestDTO), JSON.toJSONString(lockMarketPayOrderResponseDTOResponse));
     }
+
 }

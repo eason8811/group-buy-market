@@ -166,6 +166,7 @@ public class MarketTradeController implements IMarketTradeController {
                 .payOrderEntity(
                         PayOrderEntity.builder()
                                 .discountPrice(trailResultEntity.getDeductionPrice())
+                                .payPrice(trailResultEntity.getPayPrice())
                                 .build()
                 )
                 .build();

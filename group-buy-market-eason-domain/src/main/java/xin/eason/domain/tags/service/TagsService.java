@@ -41,8 +41,9 @@ public class TagsService implements ITagsService{
 
         // 3. 数据写入记录
         List<String> userIdList = new ArrayList<String>() {{
-            add("xiaofuge");
-            add("Eason");
+            add("Eason1");
+            add("Eason2");
+            add("Eason3");
         }};
 
         // 将 userId 信息写入 crowd_tags_detail 表

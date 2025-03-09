@@ -1,14 +1,20 @@
 package xin.eason.domain.activity.service.discount;
 
+import lombok.RequiredArgsConstructor;
+import xin.eason.domain.activity.adapter.repository.IActivityRepository;
 import xin.eason.domain.activity.model.valobj.DiscountType;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 
 import java.math.BigDecimal;
 
-/**
- * 折扣计算抽象模版类
- */
+@RequiredArgsConstructor
 public abstract class AbstractDiscountCalculate implements IDiscountCalculateService{
+
+    /**
+     * 活动 repository 仓储适配器接口
+     */
+    private final IActivityRepository activityRepository;
+
     /**
      * 计算打折后的价格
      *
@@ -21,7 +27,7 @@ public abstract class AbstractDiscountCalculate implements IDiscountCalculateSer
     public BigDecimal calculate(String userId, BigDecimal originalPrice, GroupBuyActivityDiscountVO.GroupBuyDiscount groupBuyDiscount) {
         if (DiscountType.TAG.equals(groupBuyDiscount.getDiscountType())) {
             // 如果折扣类型是 tag (使用标签) 则进行人群标签校验
-            boolean isCrowdRange = filterTagId(userId);
+            boolean isCrowdRange = filterTagId(groupBuyDiscount.getTagId(), userId);
             if (isCrowdRange)
                 return doCalculate(originalPrice, groupBuyDiscount);
             return originalPrice;
@@ -35,10 +41,9 @@ public abstract class AbstractDiscountCalculate implements IDiscountCalculateSer
      * @param userId 用户 ID
      * @return 用户是否可以享受该活动的折扣
      */
-    public boolean filterTagId(String userId) {
-        // TODO 后续开发
-        
-        return true;
+    public boolean filterTagId(String tagId, String userId) {
+        // 进行人群标签过滤
+        return activityRepository.queryUserInCrowd(tagId, userId);
     }
 
     /**
