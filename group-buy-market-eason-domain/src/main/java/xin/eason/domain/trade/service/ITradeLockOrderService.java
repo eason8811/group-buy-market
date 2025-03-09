@@ -5,9 +5,9 @@ import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
 
 /**
- * trade 领域服务接口
+ * trade 领域 <b>锁单</b> 服务接口
  */
-public interface ITradeService {
+public interface ITradeLockOrderService {
     /**
      * 查询未支付订单
      * @param userId 用户 ID

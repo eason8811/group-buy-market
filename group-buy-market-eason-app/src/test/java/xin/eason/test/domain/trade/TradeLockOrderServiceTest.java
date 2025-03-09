@@ -16,7 +16,7 @@ import xin.eason.api.response.Result;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @Slf4j
-public class TradeServiceTest {
+public class TradeLockOrderServiceTest {
 
     @Autowired
     private IMarketTradeController marketTradeController;

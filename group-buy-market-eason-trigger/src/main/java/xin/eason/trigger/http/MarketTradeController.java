@@ -18,7 +18,7 @@ import xin.eason.domain.trade.model.entity.PayOrderActivityEntity;
 import xin.eason.domain.trade.model.entity.PayOrderDiscountEntity;
 import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
-import xin.eason.domain.trade.service.ITradeService;
+import xin.eason.domain.trade.service.ITradeLockOrderService;
 
 @Slf4j
 @CrossOrigin
@@ -30,7 +30,7 @@ public class MarketTradeController implements IMarketTradeController {
     /**
      * 提供领域服务
      */
-    private final ITradeService tradeService;
+    private final ITradeLockOrderService tradeService;
     /**
      * 提供拼团活动领域服务
      */

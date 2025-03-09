@@ -1,4 +1,4 @@
-package xin.eason.domain.trade.service;
+package xin.eason.domain.trade.service.lock;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -9,16 +9,17 @@ import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
 import xin.eason.domain.trade.model.entity.TradeRuleFilterRequestEntity;
 import xin.eason.domain.trade.model.entity.TradeRuleFilterResponseEntity;
+import xin.eason.domain.trade.service.ITradeLockOrderService;
 import xin.eason.domain.trade.service.lock.filter.factory.TradeRuleFilterFactory;
 import xin.eason.types.design.framework.link.multimodel.chain.BusinessLinkChain;
 
 /**
- * trade 领域服务
+ * trade 领域 <b>锁单</b> 服务
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class TradeService implements ITradeService {
+public class TradeLockOrderService implements ITradeLockOrderService {
     /**
      * 拼团交易 trade 领域仓储
      */
