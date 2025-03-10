@@ -2,4 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xin.eason.infrastructure.dao.IGroupBuyOrder">
 
+    <update id="updateOrderCompleteCountByTeamId" >
+        update group_buy_order set complete_count = complete_count + 1 ${ew.customSqlSegment}
+    </update>
 </mapper>

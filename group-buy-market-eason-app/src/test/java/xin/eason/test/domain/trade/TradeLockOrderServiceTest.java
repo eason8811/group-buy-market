@@ -39,7 +39,7 @@ public class TradeLockOrderServiceTest {
     @Test
     public void test_lockMarketPayOrder_teamId_not_null() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-        lockMarketPayOrderRequestDTO.setUserId("Eason2");
+        lockMarketPayOrderRequestDTO.setUserId("Eason3");
         lockMarketPayOrderRequestDTO.setTeamId("05450613");
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");

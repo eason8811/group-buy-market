@@ -45,4 +45,10 @@ public interface ITradeRepository {
      * @return 用户参与活动次数
      */
     Long queryUserJoinActivityTimes(Long activityId, String userId);
+
+    /**
+     * 进行订单结算具体操作
+     * @param groupBuyOrderAggregate 订单聚合
+     */
+    void settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate);
 }

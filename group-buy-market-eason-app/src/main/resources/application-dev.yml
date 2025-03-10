@@ -17,7 +17,7 @@ spring:
   datasource:
     username: root
     password: 123456
-    url: jdbc:mysql://192.168.226.128:3306/group_buy_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true
+    url: jdbc:mysql://192.168.226.128:3306/group_buy_market?useUnicode=true&characterEncoding=utf8&autoReconnect=true&zeroDateTimeBehavior=convertToNull&serverTimezone=UTC&useSSL=true&useAffectedRows=true
     driver-class-name: com.mysql.cj.jdbc.Driver
   hikari:
     pool-name: Retail_HikariCP
@@ -37,6 +37,7 @@ mybatis-plus:
     db-config:
       update-strategy: not_null
       id-type: auto
+  mapper-locations: classpath:/mybatis/mapper/*.xml
 
 # MyBatis 配置【如需使用记得打开】
 #mybatis:
