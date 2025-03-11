@@ -151,6 +151,7 @@ public class MarketTradeController implements IMarketTradeController {
                                 .targetCount(trailResultEntity.getTargetCount())
                                 .startTime(trailResultEntity.getStartTime())
                                 .endTime(trailResultEntity.getEndTime())
+                                .validTime(trailResultEntity.getValidTime())
                                 .build()
                 )
                 .payOrderDiscountEntity(

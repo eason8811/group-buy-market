@@ -33,6 +33,10 @@ public class PayOrderActivityEntity {
      */
     private LocalDateTime endTime;
     /**
+     * 拼团可用时长
+     */
+    private Integer validTime;
+    /**
      * 拼团目标人数
      */
     private Integer targetCount;

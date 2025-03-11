@@ -14,6 +14,8 @@ import xin.eason.domain.trade.model.valobj.OrderListStatus;
 import xin.eason.domain.trade.model.valobj.OrderStatus;
 import xin.eason.types.exception.LockOrderException;
 
+import java.time.LocalDateTime;
+
 /**
  * 拼团订单聚合
  */
@@ -55,6 +57,7 @@ public class GroupBuyOrderAggregate {
      * 初始化 {@link #payOrderTeamEntity} 属性
      */
     public void initTeamEntity() {
+        LocalDateTime currentTime = LocalDateTime.now();
         payOrderTeamEntity = PayOrderTeamEntity.builder()
                 .teamId(RandomStringUtils.randomNumeric(8))
                 .orderStatus(OrderStatus.GROUPING)
@@ -65,6 +68,8 @@ public class GroupBuyOrderAggregate {
                                 .lockCount(0)
                                 .build()
                 )
+                .validStartTime(currentTime)
+                .validEndTime(currentTime.plusMinutes(payOrderActivityEntity.getValidTime()))
                 .build();
     }
 

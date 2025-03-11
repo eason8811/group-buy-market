@@ -2,6 +2,7 @@ package xin.eason.domain.trade.adapter.repository;
 
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
 import xin.eason.domain.trade.model.entity.GroupBuyActivityEntity;
+import xin.eason.domain.trade.model.entity.PayOrderActivityEntity;
 import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
 
@@ -51,4 +52,28 @@ public interface ITradeRepository {
      * @param groupBuyOrderAggregate 订单聚合
      */
     void settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate);
+
+    /**
+     * 根据 source 和 channel 校验是否属于黑名单内
+     * @param source 来源
+     * @param channel 渠道
+     * @return SC值 是否处于黑名单内
+     */
+    Boolean SCBlackList(String source, String channel);
+
+    /**
+     * 根据 userId 和 outOrderId 查询所属的队伍信息
+     * @param userId 用户 ID
+     * @param outOrderId 外部订单 ID
+     * @return 所属队伍信息
+     */
+    PayOrderTeamEntity queryTeamInfo(String userId, String outOrderId);
+
+    /**
+     * 根据 teamId 获取 activityId
+     *
+     * @param teamId 队伍 ID
+     * @return 订单活动实体
+     */
+    PayOrderActivityEntity queryActivityInfo(String teamId);
 }

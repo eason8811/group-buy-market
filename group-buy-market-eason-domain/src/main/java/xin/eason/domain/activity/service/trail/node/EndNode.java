@@ -39,6 +39,7 @@ public class EndNode extends AbstractGroupBuyMarketSupport {
                 .targetCount(groupBuyActivityDiscountVO.getTarget())
                 .startTime(groupBuyActivityDiscountVO.getStartTime())
                 .endTime(groupBuyActivityDiscountVO.getEndTime())
+                .validTime(groupBuyActivityDiscountVO.getValidTime())
                 .isVisible(dynamicContext.getIsVisible())
                 .isEnable(dynamicContext.getIsParticipable())
                 .build();

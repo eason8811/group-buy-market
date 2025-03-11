@@ -35,6 +35,10 @@ public class TrailResultEntity {
     private LocalDateTime startTime;
     /** 拼团结束时间 */
     private LocalDateTime endTime;
+    /**
+     * 拼团可用时长
+     */
+    private Integer validTime;
     /** 是否可见拼团 */
     private Boolean isVisible;
     /** 是否可参与进团 */

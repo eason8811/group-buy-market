@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import xin.eason.domain.trade.model.valobj.OrderListStatus;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 /**
  * 支付订单实体
@@ -28,6 +29,10 @@ public class PayOrderEntity {
      * 折扣后价格
      */
     private BigDecimal payPrice;
+    /**
+     * 该明细交易时间
+     */
+    private LocalDateTime payTime;
     /**
      * 订单明细状态
      */

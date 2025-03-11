@@ -6,7 +6,7 @@ package xin.eason.types.design.framework.link.multimodel.handler;
  * @param <R> 出参
  * @param <D> 动态上下文
  */
-public interface ILogicChainNodeHandler<T, R, D> {
+public interface IResponsibilityChainNodeHandler<T, R, D> {
     /**
      * 进入下一个逻辑的方法
      * @param requestParameter 入参

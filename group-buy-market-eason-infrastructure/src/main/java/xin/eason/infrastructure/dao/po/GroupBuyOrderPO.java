@@ -69,6 +69,14 @@ public class GroupBuyOrderPO {
      */
     private OrderStatus status;
     /**
+     * 有效开始时间
+     */
+    private LocalDateTime validStartTime;
+    /**
+     * 有效结束时间
+     */
+    private LocalDateTime validEndTime;
+    /**
      * 创建时间
      */
     private LocalDateTime createTime;

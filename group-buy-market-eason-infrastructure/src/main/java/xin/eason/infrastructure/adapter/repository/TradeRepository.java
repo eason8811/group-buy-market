@@ -20,6 +20,7 @@ import xin.eason.infrastructure.dao.po.GroupBuyActivityPO;
 import xin.eason.infrastructure.dao.po.GroupBuyOrderListPO;
 import xin.eason.infrastructure.dao.po.GroupBuyOrderPO;
 import xin.eason.infrastructure.dao.po.NotifyTask;
+import xin.eason.infrastructure.dcc.DCCService;
 import xin.eason.types.exception.UpdateAmountZeroException;
 
 import java.util.HashMap;
@@ -44,6 +45,10 @@ public class TradeRepository implements ITradeRepository {
      * 回调任务表对应 Mapper
      */
     private final INotifyTask notifyTaskMapper;
+    /**
+     * 动态配置管理服务
+     */
+    private final DCCService dccService;
 
     /**
      * 查询指定 用户ID, 外部订单ID 组合是否有未支付订单 orderStatus = INIT_LOCK(0, "初始锁定")
@@ -91,6 +96,8 @@ public class TradeRepository implements ITradeRepository {
                                 .lockCount(groupBuyOrderPO.getLockCount())
                                 .build()
                 )
+                .validStartTime(groupBuyOrderPO.getValidStartTime())
+                .validEndTime(groupBuyOrderPO.getValidEndTime())
                 .build();
     }
 
@@ -123,6 +130,8 @@ public class TradeRepository implements ITradeRepository {
                 .completeCount(teamEntity.getTeamProgress().getCompleteCount())
                 .lockCount(teamEntity.getTeamProgress().getLockCount())
                 .status(teamEntity.getOrderStatus())
+                .validStartTime(teamEntity.getValidStartTime())
+                .validEndTime(teamEntity.getValidEndTime())
                 .build();
 
         // 若是新增的队伍 (isNewTeam == true), 则 group_buy_order 表插入内容
@@ -205,12 +214,13 @@ public class TradeRepository implements ITradeRepository {
         PayOrderTeamEntity teamEntity = groupBuyOrderAggregate.getPayOrderTeamEntity();
         PayOrderActivityEntity activityEntity = groupBuyOrderAggregate.getPayOrderActivityEntity();
 
-        // 更新 拼团明细表group_buy_order_list 中的订单状态
+        // 更新 拼团明细表group_buy_order_list 中的订单状态, 并更新 支付时间
         LambdaUpdateWrapper<GroupBuyOrderListPO> orderListUpdateWrapper = new LambdaUpdateWrapper<>();
         orderListUpdateWrapper
                 .eq(GroupBuyOrderListPO::getUserId, groupBuyOrderAggregate.getUserId())
                 .eq(GroupBuyOrderListPO::getOutTradeNo, groupBuyOrderAggregate.getOuterOrderId())
-                .set(GroupBuyOrderListPO::getStatus, OrderListStatus.PAY_COMPLETE);
+                .set(GroupBuyOrderListPO::getStatus, OrderListStatus.PAY_COMPLETE)
+                .set(GroupBuyOrderListPO::getPayTime, groupBuyOrderAggregate.getPayOrderEntity().getPayTime());
         int rowCount = groupBuyOrderList.update(orderListUpdateWrapper);
         if (rowCount != 1)
             throw new UpdateAmountZeroException("group_buy_order_list 表更新订单明细状态, 受影响表记录为 0 !");
@@ -253,5 +263,69 @@ public class TradeRepository implements ITradeRepository {
 
             notifyTaskMapper.insert(notifyTask);
         }
+    }
+
+    /**
+     * 根据 source 和 channel 校验是否属于黑名单内
+     * @param source 来源
+     * @param channel 渠道
+     * @return SC值 是否处于黑名单内
+     */
+    @Override
+    public Boolean SCBlackList(String source, String channel) {
+        return dccService.isSCBlackList(source, channel);
+    }
+
+    /**
+     * 根据 userId 和 outOrderId 查询所属的队伍信息
+     *
+     * @param userId     用户 ID
+     * @param outOrderId 外部订单 ID
+     * @return 所属队伍信息
+     */
+    @Override
+    public PayOrderTeamEntity queryTeamInfo(String userId, String outOrderId) {
+        // 根据 userId 和 outOrderId 查询 订单明细信息
+        LambdaQueryWrapper<GroupBuyOrderListPO> orderListWrapper = new LambdaQueryWrapper<>();
+        orderListWrapper.eq(GroupBuyOrderListPO::getUserId, userId)
+                .eq(GroupBuyOrderListPO::getOutTradeNo, outOrderId)
+                .eq(GroupBuyOrderListPO::getStatus, OrderListStatus.INIT_LOCK);
+        GroupBuyOrderListPO groupBuyOrderListPO = groupBuyOrderList.selectOne(orderListWrapper);
+
+        // 根据获取到的订单明细信息所属的 teamId 获取队伍实体信息
+        String teamId = groupBuyOrderListPO.getTeamId();
+        LambdaQueryWrapper<GroupBuyOrderPO> orderWrapper = new LambdaQueryWrapper<>();
+        orderWrapper.eq(GroupBuyOrderPO::getTeamId, teamId);
+        GroupBuyOrderPO groupBuyOrderPO = groupBuyOrder.selectOne(orderWrapper);
+        return PayOrderTeamEntity.builder()
+                .teamId(teamId)
+                .orderStatus(groupBuyOrderPO.getStatus())
+                .validStartTime(groupBuyOrderPO.getValidStartTime())
+                .validEndTime(groupBuyOrderPO.getValidEndTime())
+                .teamProgress(
+                        GroupBuyProgressVO.builder()
+                                .targetCount(groupBuyOrderPO.getTargetCount())
+                                .completeCount(groupBuyOrderPO.getCompleteCount())
+                                .lockCount(groupBuyOrderPO.getLockCount())
+                                .build()
+                )
+                .build();
+    }
+
+    /**
+     * 根据 teamId 获取 activityId
+     *
+     * @param teamId 队伍 ID
+     * @return 订单活动实体
+     */
+    @Override
+    public PayOrderActivityEntity queryActivityInfo(String teamId) {
+        LambdaQueryWrapper<GroupBuyOrderPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(GroupBuyOrderPO::getTeamId, teamId);
+        GroupBuyOrderPO groupBuyOrderPO = groupBuyOrder.selectOne(wrapper);
+        return PayOrderActivityEntity.builder()
+                .activityId(groupBuyOrderPO.getActivityId())
+                .targetCount(groupBuyOrderPO.getTargetCount())
+                .build();
     }
 }

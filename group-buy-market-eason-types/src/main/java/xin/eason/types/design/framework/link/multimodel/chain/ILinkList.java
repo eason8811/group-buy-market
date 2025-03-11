@@ -4,7 +4,7 @@ package xin.eason.types.design.framework.link.multimodel.chain;
  * 链表接口, 对链表的实现提供规范
  * @param <E> 链表内部储存的对象类型
  */
-public interface ILinkChain<E> {
+public interface ILinkList<E> {
     /**
      * 向链表中添加元素
      * @param element 需要添加的元素

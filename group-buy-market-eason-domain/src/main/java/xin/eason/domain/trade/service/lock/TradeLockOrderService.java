@@ -1,33 +1,37 @@
 package xin.eason.domain.trade.service.lock;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import xin.eason.domain.trade.adapter.repository.ITradeRepository;
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
 import xin.eason.domain.trade.model.entity.PayOrderEntity;
 import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
-import xin.eason.domain.trade.model.entity.TradeRuleFilterRequestEntity;
-import xin.eason.domain.trade.model.entity.TradeRuleFilterResponseEntity;
+import xin.eason.domain.trade.model.entity.TradeLockRuleFilterRequestEntity;
+import xin.eason.domain.trade.model.entity.TradeLockRuleFilterResponseEntity;
 import xin.eason.domain.trade.service.ITradeLockOrderService;
-import xin.eason.domain.trade.service.lock.filter.factory.TradeRuleFilterFactory;
-import xin.eason.types.design.framework.link.multimodel.chain.BusinessLinkChain;
+import xin.eason.domain.trade.service.lock.filter.factory.TradeLockRuleFilterFactory;
+import xin.eason.types.design.framework.link.multimodel.chain.BusinessLinkList;
 
 /**
  * trade 领域 <b>锁单</b> 服务
  */
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class TradeLockOrderService implements ITradeLockOrderService {
     /**
      * 拼团交易 trade 领域仓储
      */
     private final ITradeRepository tradeRepository;
     /**
-     * 交易规则过滤责任链对象
+     * 交易锁单规则过滤责任链对象
      */
-    private final BusinessLinkChain<TradeRuleFilterRequestEntity, TradeRuleFilterResponseEntity, TradeRuleFilterFactory.DynamicContext> tradeRuleFilterResponsibilityChain;
+    private final BusinessLinkList<TradeLockRuleFilterRequestEntity, TradeLockRuleFilterResponseEntity, TradeLockRuleFilterFactory.DynamicContext> tradeLockRuleFilterResponsibilityChain;
+
+    public TradeLockOrderService(ITradeRepository tradeRepository, @Qualifier("tradeLockRuleFilterResponsibilityChain") BusinessLinkList<TradeLockRuleFilterRequestEntity, TradeLockRuleFilterResponseEntity, TradeLockRuleFilterFactory.DynamicContext> tradeLockRuleFilterResponsibilityChain) {
+        this.tradeRepository = tradeRepository;
+        this.tradeLockRuleFilterResponsibilityChain = tradeLockRuleFilterResponsibilityChain;
+    }
 
     /**
      * 查询该用户的未支付订单
@@ -65,13 +69,13 @@ public class TradeLockOrderService implements ITradeLockOrderService {
         log.info("用户 ID: {}, 外部订单 ID: {}, 正在锁定订单...", groupBuyOrderAggregate.getUserId(), groupBuyOrderAggregate.getOuterOrderId());
 
         // 进行交易规则校验
-        TradeRuleFilterRequestEntity requestParam = TradeRuleFilterRequestEntity.builder()
+        TradeLockRuleFilterRequestEntity requestParam = TradeLockRuleFilterRequestEntity.builder()
                 .activityId(groupBuyOrderAggregate.getPayOrderActivityEntity().getActivityId())
                 .userId(groupBuyOrderAggregate.getUserId())
                 .build();
         // 返回用户已经参与了该活动的次数
-        TradeRuleFilterResponseEntity tradeRuleFilterResponseEntity = tradeRuleFilterResponsibilityChain.apply(requestParam, new TradeRuleFilterFactory.DynamicContext());
-        groupBuyOrderAggregate.setJoinTimes(tradeRuleFilterResponseEntity.getUserJoinTimes());
+        TradeLockRuleFilterResponseEntity tradeLockRuleFilterResponseEntity = tradeLockRuleFilterResponsibilityChain.apply(requestParam, new TradeLockRuleFilterFactory.DynamicContext());
+        groupBuyOrderAggregate.setJoinTimes(tradeLockRuleFilterResponseEntity.getUserJoinTimes());
         // 锁定订单
         tradeRepository.lockOrder(groupBuyOrderAggregate);
 

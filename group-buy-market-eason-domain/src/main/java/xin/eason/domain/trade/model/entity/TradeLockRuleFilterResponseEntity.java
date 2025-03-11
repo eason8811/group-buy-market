@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TradeRuleFilterResponseEntity {
+public class TradeLockRuleFilterResponseEntity {
     private Long userJoinTimes;
 }

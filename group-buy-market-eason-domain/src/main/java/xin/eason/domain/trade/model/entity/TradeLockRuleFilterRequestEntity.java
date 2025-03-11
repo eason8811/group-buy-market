@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class TradeRuleFilterRequestEntity {
+public class TradeLockRuleFilterRequestEntity {
     /**
      * 活动 ID
      */

@@ -10,31 +10,25 @@ import xin.eason.domain.trade.model.valobj.OrderStatus;
 import java.time.LocalDateTime;
 
 /**
- * 拼团队伍实体
+ * 订单结算规则过滤响应实体
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PayOrderTeamEntity {
-    /**
-     * 拼团队伍 ID
-     */
+public class TradeSettlementRuleFilterResponseEntity {
+    /** 拼单组队ID */
     private String teamId;
+    /** 活动ID */
+    private Long activityId;
     /**
-     * 队伍拼团状态
-     */
-    private OrderStatus orderStatus;
-    /**
-     * 该队伍有效开始时间
-     */
-    private LocalDateTime validStartTime;
-    /**
-     * 该队伍有效结束时间
-     */
-    private LocalDateTime validEndTime;
-    /**
-     * 拼团进度
+     * 队伍进度
      */
     private GroupBuyProgressVO teamProgress;
+    /** 状态（0-拼单中、1-完成、2-失败） */
+    private OrderStatus status;
+    /** 拼团开始时间 - 参与拼团时间 */
+    private LocalDateTime validStartTime;
+    /** 拼团结束时间 - 拼团有效时长 */
+    private LocalDateTime validEndTime;
 }

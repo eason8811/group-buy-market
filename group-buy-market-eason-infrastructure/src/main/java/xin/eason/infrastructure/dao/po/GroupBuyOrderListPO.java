@@ -1,5 +1,6 @@
 package xin.eason.infrastructure.dao.po;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -72,6 +73,11 @@ public class GroupBuyOrderListPO {
      * 状态；0初始锁定、1消费完成
      */
     private OrderListStatus status;
+    /**
+     * 实际支付时间
+     */
+    @TableField("out_trade_time")
+    private LocalDateTime payTime;
     /**
      * 外部交易单号-确保外部调用唯一幂等
      */

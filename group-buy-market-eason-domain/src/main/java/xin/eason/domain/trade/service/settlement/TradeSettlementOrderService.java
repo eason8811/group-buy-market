@@ -1,54 +1,79 @@
 package xin.eason.domain.trade.service.settlement;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import xin.eason.domain.trade.adapter.repository.ITradeRepository;
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
-import xin.eason.domain.trade.model.entity.OrderSettlementSuccessEntity;
-import xin.eason.domain.trade.model.entity.PayOrderDiscountEntity;
-import xin.eason.domain.trade.model.entity.PayOrderEntity;
+import xin.eason.domain.trade.model.entity.*;
 import xin.eason.domain.trade.service.ITradeSettlementOrderService;
+import xin.eason.domain.trade.service.settlement.filter.factory.TradeSettlementRuleFilterFactory;
+import xin.eason.types.design.framework.link.multimodel.chain.BusinessLinkList;
+
+import java.time.LocalDateTime;
 
 /**
  * trade 领域 <b>结算订单</b> 服务
  */
 @Slf4j
 @Service
-@RequiredArgsConstructor
 public class TradeSettlementOrderService implements ITradeSettlementOrderService {
 
     /**
      * 拼团交易 trade 领域仓储
      */
     private final ITradeRepository tradeRepository;
+    /**
+     * 交易结算规则过滤责任链对象
+     */
+    private final BusinessLinkList<TradeSettlementRuleFilterRequestEntity, TradeSettlementRuleFilterResponseEntity, TradeSettlementRuleFilterFactory.DynamicContext> tradeSettlementRuleFilterResponsibilityChain;
+
+    public TradeSettlementOrderService(ITradeRepository tradeRepository, @Qualifier("tradeSettlementRuleFilterResponsibilityChain") BusinessLinkList<TradeSettlementRuleFilterRequestEntity, TradeSettlementRuleFilterResponseEntity, TradeSettlementRuleFilterFactory.DynamicContext> tradeSettlementRuleFilterResponsibilityChain) {
+        this.tradeRepository = tradeRepository;
+        this.tradeSettlementRuleFilterResponsibilityChain = tradeSettlementRuleFilterResponsibilityChain;
+    }
 
     /**
-     * <p>根据订单聚合内的相关信息进行订单结算</p>
+     * <p>根据订单结算实体的相关信息进行订单结算</p>
      * <p>返回 <b>SC 值, userId, outerOrderId, teamId, activityId</b></p>
      *
-     * @param groupBuyOrderAggregate 订单聚合
+     * @param orderSettlementEntity 订单结算实体
      * @return 订单结算成功实体
      */
     @Override
-    public OrderSettlementSuccessEntity settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate) {
-        log.info("拼团交易-支付订单结算, userId: {} outOrderId: {}", groupBuyOrderAggregate.getUserId(), groupBuyOrderAggregate.getOuterOrderId());
-        // 根据 外部订单ID 查询数据库内是否有这个订单, 如没有, 则直接返回 null
-        PayOrderEntity payOrderEntity = tradeRepository.queryUnpayOrder(groupBuyOrderAggregate.getUserId(), groupBuyOrderAggregate.getOuterOrderId());
-        if (payOrderEntity == null) {
-            log.error("不存在的外部交易单号或用户已退单，不需要做支付订单结算, userId: {} outOrderId: {}", groupBuyOrderAggregate.getUserId(), groupBuyOrderAggregate.getOuterOrderId());
-            return null;
-        }
+    public OrderSettlementSuccessEntity settlementPayOrder(OrderSettlementEntity orderSettlementEntity) {
+        log.info("拼团交易-支付订单结算, userId: {} outOrderId: {}", orderSettlementEntity.getUserId(), orderSettlementEntity.getOuterOrderId());
+        LocalDateTime payTime = orderSettlementEntity.getPayTime();
+
+        TradeSettlementRuleFilterRequestEntity settlementRuleFilterRequest = TradeSettlementRuleFilterRequestEntity.builder()
+                .source(orderSettlementEntity.getSource())
+                .channel(orderSettlementEntity.getChannel())
+                .userId(orderSettlementEntity.getUserId())
+                .outOrderId(orderSettlementEntity.getOuterOrderId())
+                .payTime(payTime)
+                .build();
+
+        TradeSettlementRuleFilterResponseEntity responseEntity = tradeSettlementRuleFilterResponsibilityChain.apply(settlementRuleFilterRequest, new TradeSettlementRuleFilterFactory.DynamicContext());
+
+        PayOrderTeamEntity teamEntity = tradeRepository.queryTeamInfo(orderSettlementEntity.getUserId(), orderSettlementEntity.getOuterOrderId());
+        PayOrderActivityEntity activityEntity = tradeRepository.queryActivityInfo(teamEntity.getTeamId());
+        PayOrderEntity orderEntity = PayOrderEntity.builder().payTime(payTime).build();
 
         // 进行订单结算
+        GroupBuyOrderAggregate groupBuyOrderAggregate = GroupBuyOrderAggregate.builder()
+                .userId(orderSettlementEntity.getUserId())
+                .outerOrderId(settlementRuleFilterRequest.getOutOrderId())
+                .payOrderEntity(orderEntity)
+                .payOrderTeamEntity(teamEntity)
+                .payOrderActivityEntity(activityEntity)
+                .build();
         tradeRepository.settlementPayOrder(groupBuyOrderAggregate);
 
-        PayOrderDiscountEntity discountEntity = groupBuyOrderAggregate.getPayOrderDiscountEntity();
         return OrderSettlementSuccessEntity.builder()
-                .source(discountEntity.getSource())
-                .channel(discountEntity.getChannel())
-                .userId(groupBuyOrderAggregate.getUserId())
-                .outTradeNo(groupBuyOrderAggregate.getOuterOrderId())
+                .source(orderSettlementEntity.getSource())
+                .channel(orderSettlementEntity.getChannel())
+                .userId(orderSettlementEntity.getUserId())
+                .outTradeNo(orderSettlementEntity.getOuterOrderId())
                 .teamId(groupBuyOrderAggregate.getPayOrderTeamEntity().getTeamId())
                 .activityId(groupBuyOrderAggregate.getPayOrderActivityEntity().getActivityId())
                 .build();

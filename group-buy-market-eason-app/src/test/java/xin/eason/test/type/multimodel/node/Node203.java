@@ -3,11 +3,11 @@ package xin.eason.test.type.multimodel.node;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import xin.eason.test.type.multimodel.factory.LogicLinkChainFactory;
-import xin.eason.types.design.framework.link.multimodel.handler.ILogicChainNodeHandler;
+import xin.eason.types.design.framework.link.multimodel.handler.IResponsibilityChainNodeHandler;
 
 @Slf4j
 @Component
-public class Node203 implements ILogicChainNodeHandler<String, String, LogicLinkChainFactory.DynamicContext> {
+public class Node203 implements IResponsibilityChainNodeHandler<String, String, LogicLinkChainFactory.DynamicContext> {
     /**
      * 处理节点内的逻辑
      *

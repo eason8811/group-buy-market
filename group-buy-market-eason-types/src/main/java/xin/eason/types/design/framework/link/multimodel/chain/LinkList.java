@@ -4,12 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 链表实现类, 实现了 {@link ILinkChain}
+ * 链表实现类, 实现了 {@link ILinkList}
  *
  * @param <E> 链表内部储存的对象类型
  */
 @Slf4j
-public class LinkChain<E> implements ILinkChain<E> {
+public class LinkList<E> implements ILinkList<E> {
 
     /**
      * 链表的第一个元素
@@ -45,6 +45,7 @@ public class LinkChain<E> implements ILinkChain<E> {
             // 最后一个元素存在, 执行尾插
             newNode.prev = lastNode;
             lastNode.next = newNode;
+            lastNode = newNode;
             size++;
             return true;
         } catch (Exception e) {

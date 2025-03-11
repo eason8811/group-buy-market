@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 import xin.eason.domain.activity.model.valobj.ActivityStatus;
 import xin.eason.domain.trade.adapter.repository.ITradeRepository;
 import xin.eason.domain.trade.model.entity.GroupBuyActivityEntity;
-import xin.eason.domain.trade.model.entity.TradeRuleFilterRequestEntity;
-import xin.eason.domain.trade.model.entity.TradeRuleFilterResponseEntity;
-import xin.eason.domain.trade.service.lock.filter.factory.TradeRuleFilterFactory;
-import xin.eason.types.design.framework.link.multimodel.handler.ILogicChainNodeHandler;
+import xin.eason.domain.trade.model.entity.TradeLockRuleFilterRequestEntity;
+import xin.eason.domain.trade.model.entity.TradeLockRuleFilterResponseEntity;
+import xin.eason.domain.trade.service.lock.filter.factory.TradeLockRuleFilterFactory;
+import xin.eason.types.design.framework.link.multimodel.handler.IResponsibilityChainNodeHandler;
 import xin.eason.types.exception.ActivityUnavailableException;
 
 import java.time.LocalDateTime;
@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
  */
 @Slf4j
 @Component
-public class ActivityAvailableFilterNode implements ILogicChainNodeHandler<TradeRuleFilterRequestEntity, TradeRuleFilterResponseEntity, TradeRuleFilterFactory.DynamicContext> {
+public class ActivityAvailableFilterNode implements IResponsibilityChainNodeHandler<TradeLockRuleFilterRequestEntity, TradeLockRuleFilterResponseEntity, TradeLockRuleFilterFactory.DynamicContext> {
     /**
      * 交易 repository 仓储适配器接口
      */
@@ -36,7 +36,7 @@ public class ActivityAvailableFilterNode implements ILogicChainNodeHandler<Trade
      * @return 出参
      */
     @Override
-    public TradeRuleFilterResponseEntity apply(TradeRuleFilterRequestEntity requestParam, TradeRuleFilterFactory.DynamicContext dynamicContext) {
+    public TradeLockRuleFilterResponseEntity apply(TradeLockRuleFilterRequestEntity requestParam, TradeLockRuleFilterFactory.DynamicContext dynamicContext) {
         log.info("交易规则过滤责任链 [{}]: 活动可用性校验, activityId: {}", this.getClass().getSimpleName(), requestParam.getActivityId());
         // 查询活动
         GroupBuyActivityEntity activityEntity = tradeRepository.queryActivityByActivityId(requestParam.getActivityId());
@@ -53,6 +53,7 @@ public class ActivityAvailableFilterNode implements ILogicChainNodeHandler<Trade
             throw new ActivityUnavailableException("活动不可用! 当前活动状态为: " + activityEntity.getStatus().getDesc());
 
         dynamicContext.setGroupBuyActivityEntity(activityEntity);
+        log.info("交易规则过滤责任链 [{}] 校验完成", this.getClass().getSimpleName());
         return next(requestParam, dynamicContext);
     }
 }

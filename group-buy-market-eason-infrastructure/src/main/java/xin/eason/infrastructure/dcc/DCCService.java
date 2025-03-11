@@ -3,6 +3,9 @@ package xin.eason.infrastructure.dcc;
 import org.springframework.stereotype.Service;
 import xin.eason.types.annotations.DCCValue;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 动态配置管理服务
  */
@@ -18,6 +21,12 @@ public class DCCService {
      */
     @DCCValue("cutrange:100")
     private Integer cutRange;
+    /**
+     * SC值黑名单开关
+     */
+    @DCCValue("scblacklist:s02c02")
+    private String scBlackList;
+
 
     /**
      * 判断服务是否降级
@@ -38,5 +47,16 @@ public class DCCService {
         int lastTwoDigits = userIdHash % 100;
         // 如果在切量范围内, 返回 true 否则 false
         return lastTwoDigits <= cutRange;
+    }
+
+    /**
+     * 根据 source 和 channel 判断是否在黑名单内
+     * @param source 来源
+     * @param channel 渠道
+     * @return 黑名单情况
+     */
+    public Boolean isSCBlackList(String source, String channel) {
+        List<String> scBlackList = Arrays.asList(this.scBlackList.split(","));
+        return scBlackList.contains(source + channel);
     }
 }
