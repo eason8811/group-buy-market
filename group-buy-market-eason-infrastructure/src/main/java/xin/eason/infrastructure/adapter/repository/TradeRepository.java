@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import xin.eason.domain.trade.adapter.repository.ITradeRepository;
@@ -19,13 +20,14 @@ import xin.eason.infrastructure.dao.INotifyTask;
 import xin.eason.infrastructure.dao.po.GroupBuyActivityPO;
 import xin.eason.infrastructure.dao.po.GroupBuyOrderListPO;
 import xin.eason.infrastructure.dao.po.GroupBuyOrderPO;
-import xin.eason.infrastructure.dao.po.NotifyTask;
+import xin.eason.infrastructure.dao.po.NotifyTaskPO;
 import xin.eason.infrastructure.dcc.DCCService;
 import xin.eason.types.exception.UpdateAmountZeroException;
 
 import java.util.HashMap;
 import java.util.List;
 
+@Slf4j
 @Component
 @RequiredArgsConstructor
 public class TradeRepository implements ITradeRepository {
@@ -109,7 +111,7 @@ public class TradeRepository implements ITradeRepository {
     @Override
     @Transactional
     public void lockOrder(GroupBuyOrderAggregate groupBuyOrderAggregate) {
-        boolean isNewTeam = groupBuyOrderAggregate.getPayOrderTeamEntity() == null;
+        boolean isNewTeam = groupBuyOrderAggregate.getPayOrderTeamEntity().getTeamId() == null;
         // 更改聚合中有关拼团订单名额的信息
         groupBuyOrderAggregate.lockOrder();
 
@@ -132,6 +134,7 @@ public class TradeRepository implements ITradeRepository {
                 .status(teamEntity.getOrderStatus())
                 .validStartTime(teamEntity.getValidStartTime())
                 .validEndTime(teamEntity.getValidEndTime())
+                .notifyUrl(teamEntity.getNotifyUrl())
                 .build();
 
         // 若是新增的队伍 (isNewTeam == true), 则 group_buy_order 表插入内容
@@ -207,10 +210,11 @@ public class TradeRepository implements ITradeRepository {
      * 进行订单结算具体操作
      *
      * @param groupBuyOrderAggregate 订单聚合
+     * @return 是否需要回调
      */
     @Override
     @Transactional
-    public void settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate) {
+    public Boolean settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate) {
         PayOrderTeamEntity teamEntity = groupBuyOrderAggregate.getPayOrderTeamEntity();
         PayOrderActivityEntity activityEntity = groupBuyOrderAggregate.getPayOrderActivityEntity();
 
@@ -225,6 +229,7 @@ public class TradeRepository implements ITradeRepository {
         if (rowCount != 1)
             throw new UpdateAmountZeroException("group_buy_order_list 表更新订单明细状态, 受影响表记录为 0 !");
 
+
         // 更新 拼团订单表group_buy_order 中的 拼团完成数量complete_count
         LambdaUpdateWrapper<GroupBuyOrderPO> orderUpdateWrapper = new LambdaUpdateWrapper<>();
         orderUpdateWrapper.eq(GroupBuyOrderPO::getTeamId, teamEntity.getTeamId());
@@ -234,6 +239,7 @@ public class TradeRepository implements ITradeRepository {
 
         // 如果当前完成的订单是最后一个达成目标的订单
         if (teamEntity.getTeamProgress().getTargetCount() == teamEntity.getTeamProgress().getCompleteCount() + 1) {
+
             // 更新 拼团订单表group_buy_order 中的订单状态
             LambdaUpdateWrapper<GroupBuyOrderPO> updateOrderStatusWrapper = new LambdaUpdateWrapper<>();
             updateOrderStatusWrapper
@@ -242,6 +248,7 @@ public class TradeRepository implements ITradeRepository {
             rowCount = groupBuyOrder.update(updateOrderStatusWrapper);
             if (rowCount != 1)
                 throw new UpdateAmountZeroException("group_buy_order 表更新订单状态, 受影响表记录为 0 !");
+
 
             // 获取该 teamId 在 group_buy_order_list 表中所有的 outerOrderId, 装配 notifyEntity
             LambdaQueryWrapper<GroupBuyOrderListPO> queryWrapper = new LambdaQueryWrapper<>();
@@ -252,22 +259,25 @@ public class TradeRepository implements ITradeRepository {
             jsonDataMap.put("teamId", teamEntity.getTeamId());
             jsonDataMap.put("outerOrderId", groupBuyOrderListOfTeam.stream().map(GroupBuyOrderListPO::getOutTradeNo).toList());
 
-            NotifyTask notifyTask = NotifyTask.builder()
+            NotifyTaskPO notifyTask = NotifyTaskPO.builder()
                     .activityId(activityEntity.getActivityId())
                     .teamId(teamEntity.getTeamId())
-                    .notifyUrl("暂无 URL")
+                    .notifyUrl(teamEntity.getNotifyUrl())
                     .notifyCount(0)
                     .notifyStatus(0)
                     .parameterJson(JSON.toJSONString(jsonDataMap))
                     .build();
 
             notifyTaskMapper.insert(notifyTask);
+            return true;
         }
+        return false;
     }
 
     /**
      * 根据 source 和 channel 校验是否属于黑名单内
-     * @param source 来源
+     *
+     * @param source  来源
      * @param channel 渠道
      * @return SC值 是否处于黑名单内
      */
@@ -309,6 +319,7 @@ public class TradeRepository implements ITradeRepository {
                                 .lockCount(groupBuyOrderPO.getLockCount())
                                 .build()
                 )
+                .notifyUrl(groupBuyOrderPO.getNotifyUrl())
                 .build();
     }
 
@@ -327,5 +338,87 @@ public class TradeRepository implements ITradeRepository {
                 .activityId(groupBuyOrderPO.getActivityId())
                 .targetCount(groupBuyOrderPO.getTargetCount())
                 .build();
+    }
+
+    /**
+     * 查询所有未回调的回调任务
+     *
+     * @return 回调任务列表
+     */
+    @Override
+    public List<NotifyTaskEntity> queryNoNotifyTaskList() {
+        LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.in(NotifyTaskPO::getNotifyStatus, List.of(0, 2));
+        List<NotifyTaskPO> notifyTaskList = notifyTaskMapper.selectList(wrapper);
+        return notifyTaskList.stream()
+                .map(notifyTask ->
+                        NotifyTaskEntity.builder()
+                                .teamId(notifyTask.getTeamId())
+                                .notifyUrl(notifyTask.getNotifyUrl())
+                                .notifyCount(notifyTask.getNotifyCount())
+                                .parameterJson(notifyTask.getParameterJson())
+                                .build())
+                .toList();
+    }
+
+    /**
+     * 查询指定 teamId 的回调任务信息
+     *
+     * @param teamId 队伍 ID
+     * @return 回调任务列表
+     */
+    @Override
+    public List<NotifyTaskEntity> queryNoNotifyTaskList(String teamId) {
+        LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(NotifyTaskPO::getTeamId, teamId).in(NotifyTaskPO::getNotifyStatus, List.of(0, 2));
+        List<NotifyTaskPO> notifyTaskList = notifyTaskMapper.selectList(wrapper);
+        return notifyTaskList.stream()
+                .map(notifyTask ->
+                        NotifyTaskEntity.builder()
+                                .teamId(notifyTask.getTeamId())
+                                .notifyUrl(notifyTask.getNotifyUrl())
+                                .notifyCount(notifyTask.getNotifyCount())
+                                .parameterJson(notifyTask.getParameterJson())
+                                .build())
+                .toList();
+    }
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 成功
+     *
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    @Override
+    public int updateNotifyStatusSuccess(NotifyTaskEntity notifyTaskEntity) {
+        LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(NotifyTaskPO::getTeamId, notifyTaskEntity.getTeamId());
+        return notifyTaskMapper.updateNotifyStatusSuccess(wrapper);
+    }
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 失败
+     *
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    @Override
+    public int updateNotifyStatusError(NotifyTaskEntity notifyTaskEntity) {
+        LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(NotifyTaskPO::getTeamId, notifyTaskEntity.getTeamId());
+        return notifyTaskMapper.updateNotifyStatusError(wrapper);
+    }
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 重试
+     *
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    @Override
+    public int updateNotifyStatusRetry(NotifyTaskEntity notifyTaskEntity) {
+        LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
+        wrapper.eq(NotifyTaskPO::getTeamId, notifyTaskEntity.getTeamId());
+        return notifyTaskMapper.updateNotifyStatusRetry(wrapper);
     }
 }

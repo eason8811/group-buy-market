@@ -1,10 +1,9 @@
 package xin.eason.domain.trade.adapter.repository;
 
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
-import xin.eason.domain.trade.model.entity.GroupBuyActivityEntity;
-import xin.eason.domain.trade.model.entity.PayOrderActivityEntity;
-import xin.eason.domain.trade.model.entity.PayOrderEntity;
-import xin.eason.domain.trade.model.entity.PayOrderTeamEntity;
+import xin.eason.domain.trade.model.entity.*;
+
+import java.util.List;
 
 /**
  * trade 领域仓储接口
@@ -50,8 +49,9 @@ public interface ITradeRepository {
     /**
      * 进行订单结算具体操作
      * @param groupBuyOrderAggregate 订单聚合
+     * @return 是否需要回调
      */
-    void settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate);
+    Boolean settlementPayOrder(GroupBuyOrderAggregate groupBuyOrderAggregate);
 
     /**
      * 根据 source 和 channel 校验是否属于黑名单内
@@ -76,4 +76,38 @@ public interface ITradeRepository {
      * @return 订单活动实体
      */
     PayOrderActivityEntity queryActivityInfo(String teamId);
+
+    /**
+     * 查询所有未回调的回调任务
+     * @return 回调任务列表
+     */
+    List<NotifyTaskEntity> queryNoNotifyTaskList();
+
+    /**
+     * 查询指定 teamId 的回调任务信息
+     * @param teamId 队伍 ID
+     * @return 回调任务列表
+     */
+    List<NotifyTaskEntity> queryNoNotifyTaskList(String teamId);
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 成功
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    int updateNotifyStatusSuccess(NotifyTaskEntity notifyTaskEntity);
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 失败
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    int updateNotifyStatusError(NotifyTaskEntity notifyTaskEntity);
+
+    /**
+     * 根据 notify 实体将回调明细的 回调次数 +1 并将状态修改为 重试
+     * @param notifyTaskEntity 回调任务实体
+     * @return 受修改的行数
+     */
+    int updateNotifyStatusRetry(NotifyTaskEntity notifyTaskEntity);
 }

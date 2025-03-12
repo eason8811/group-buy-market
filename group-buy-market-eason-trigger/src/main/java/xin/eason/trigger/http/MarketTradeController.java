@@ -96,6 +96,7 @@ public class MarketTradeController implements IMarketTradeController {
         String source = lockMarketPayOrderRequestDTO.getSource();
         String channel = lockMarketPayOrderRequestDTO.getChannel();
         Long activityId = lockMarketPayOrderRequestDTO.getActivityId();
+        String notifyUrl = lockMarketPayOrderRequestDTO.getNotifyUrl();
         // 返回内部订单编号, 折扣价格, 订单状态
         PayOrderEntity payOrderEntity = tradeService.checkUnpayOrder(userId, outerOrderId);
 
@@ -114,7 +115,7 @@ public class MarketTradeController implements IMarketTradeController {
         log.info("userId: {}, outerOrderId: {} 未有订单, 正在检测用户是否为拼团团长...", userId, outerOrderId);
 
         // 检测是否是拼团团长
-        PayOrderTeamEntity payOrderTeamEntity = null;
+        PayOrderTeamEntity payOrderTeamEntity;
         if (teamId != null) {
             // 不是拼团团长, 查询拼团队伍是否满员, 如有, 直接返回拼团失败
             log.info("用户不是拼团团长, 正在加入 teamId: {} 的队伍, 正在查询该队伍的名额是否已满...", teamId);
@@ -127,6 +128,7 @@ public class MarketTradeController implements IMarketTradeController {
             log.info("teamId: {} 的队伍可以加入", teamId);
         } else {
             log.info("用户 ID: {}, 是拼团队伍团长", userId);
+            payOrderTeamEntity = PayOrderTeamEntity.builder().notifyUrl(notifyUrl).build();
         }
 
         // 进行拼团试算

@@ -58,19 +58,18 @@ public class GroupBuyOrderAggregate {
      */
     public void initTeamEntity() {
         LocalDateTime currentTime = LocalDateTime.now();
-        payOrderTeamEntity = PayOrderTeamEntity.builder()
-                .teamId(RandomStringUtils.randomNumeric(8))
-                .orderStatus(OrderStatus.GROUPING)
-                .teamProgress(
-                        GroupBuyProgressVO.builder()
-                                .targetCount(payOrderActivityEntity.getTargetCount())
-                                .completeCount(0)
-                                .lockCount(0)
-                                .build()
-                )
-                .validStartTime(currentTime)
-                .validEndTime(currentTime.plusMinutes(payOrderActivityEntity.getValidTime()))
-                .build();
+
+        payOrderTeamEntity.setTeamId(RandomStringUtils.randomNumeric(8));
+        payOrderTeamEntity.setOrderStatus(OrderStatus.GROUPING);
+        payOrderTeamEntity.setTeamProgress(
+                GroupBuyProgressVO.builder()
+                        .targetCount(payOrderActivityEntity.getTargetCount())
+                        .completeCount(0)
+                        .lockCount(0)
+                        .build()
+        );
+        payOrderTeamEntity.setValidStartTime(currentTime);
+        payOrderTeamEntity.setValidEndTime(currentTime.plusMinutes(payOrderActivityEntity.getValidTime()));
     }
 
     /**
@@ -78,7 +77,7 @@ public class GroupBuyOrderAggregate {
      */
     public void lockOrder() {
         // 如果 payOrderTeamEntity 为 null 就先初始化
-        if (payOrderTeamEntity == null)
+        if (payOrderTeamEntity.getTeamId() == null)
             initTeamEntity();
         if (payOrderTeamEntity.getOrderStatus() != OrderStatus.GROUPING)
             // 如果拼团订单状态不在 拼单中 代表无法加入队伍, 抛出异常

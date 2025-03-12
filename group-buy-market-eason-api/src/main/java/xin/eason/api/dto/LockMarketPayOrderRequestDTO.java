@@ -41,4 +41,8 @@ public class LockMarketPayOrderRequestDTO {
      * 外部订单 ID 确保系统内部唯一幂等
      */
     private String outerOrderId;
+    /**
+     * 回调地址 URL
+     */
+    private String notifyUrl;
 }

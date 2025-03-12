@@ -2,4 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xin.eason.infrastructure.dao.INotifyTask">
 
+    <update id="updateNotifyStatusSuccess">
+        update notify_task set notify_count = notify_count + 1, notify_status = 1 ${ew.customSqlSegment}
+    </update>
+
+    <update id="updateNotifyStatusError">
+        update notify_task set notify_count = notify_count + 1, notify_status = 3 ${ew.customSqlSegment}
+    </update>
+
+    <update id="updateNotifyStatusRetry">
+        update notify_task set notify_count = notify_count + 1, notify_status = 2 ${ew.customSqlSegment}
+    </update>
 </mapper>

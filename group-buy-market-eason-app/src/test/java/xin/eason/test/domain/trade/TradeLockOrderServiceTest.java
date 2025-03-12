@@ -24,7 +24,8 @@ public class TradeLockOrderServiceTest {
     @Test
     public void test_lockMarketPayOrder() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-        lockMarketPayOrderRequestDTO.setUserId("Eason1");
+        lockMarketPayOrderRequestDTO.setNotifyUrl("http://127.0.0.1:8080/api/v1/test/group_buy_notify");
+        lockMarketPayOrderRequestDTO.setUserId("Eason4");
         lockMarketPayOrderRequestDTO.setTeamId(null);
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");
@@ -39,8 +40,9 @@ public class TradeLockOrderServiceTest {
     @Test
     public void test_lockMarketPayOrder_teamId_not_null() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
-        lockMarketPayOrderRequestDTO.setUserId("Eason3");
-        lockMarketPayOrderRequestDTO.setTeamId("84683158");
+        lockMarketPayOrderRequestDTO.setNotifyUrl("http://127.0.0.1:8080/api/v1/test/group_buy_notify");
+        lockMarketPayOrderRequestDTO.setUserId("Eason4");
+        lockMarketPayOrderRequestDTO.setTeamId("39782592");
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");
         lockMarketPayOrderRequestDTO.setSource("s01");

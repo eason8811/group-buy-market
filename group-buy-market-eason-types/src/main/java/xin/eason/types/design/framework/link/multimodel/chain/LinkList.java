@@ -22,7 +22,7 @@ public class LinkList<E> implements ILinkList<E> {
     /**
      * 链表的长度
      */
-    protected Integer size;
+    protected Integer size = 0;
 
     /**
      * 尾插法向链表中添加元素

@@ -37,4 +37,8 @@ public class PayOrderTeamEntity {
      * 拼团进度
      */
     private GroupBuyProgressVO teamProgress;
+    /**
+     * 回调地址 URL
+     */
+    private String notifyUrl;
 }

@@ -27,7 +27,7 @@ public class TradeSettelmentOrderServiceTest {
                 .source("s01")
                 .channel("c01")
                 .userId("Eason3")
-                .outerOrderId("594404161145")
+                .outerOrderId("174669184617")
                 .payTime(LocalDateTime.now())
                 .build();
 

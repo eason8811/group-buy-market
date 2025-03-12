@@ -77,6 +77,10 @@ public class GroupBuyOrderPO {
      */
     private LocalDateTime validEndTime;
     /**
+     * 回调地址 URL
+     */
+    private String notifyUrl;
+    /**
      * 创建时间
      */
     private LocalDateTime createTime;

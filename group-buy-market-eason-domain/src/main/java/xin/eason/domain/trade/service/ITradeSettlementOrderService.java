@@ -3,6 +3,8 @@ package xin.eason.domain.trade.service;
 import xin.eason.domain.trade.model.entity.OrderSettlementEntity;
 import xin.eason.domain.trade.model.entity.OrderSettlementSuccessEntity;
 
+import java.util.Map;
+
 /**
  * trade 领域 <b>结算订单</b> 服务接口
  */
@@ -15,4 +17,17 @@ public interface ITradeSettlementOrderService {
      * @return 订单结算成功实体
      */
     OrderSettlementSuccessEntity settlementPayOrder(OrderSettlementEntity orderSettlementEntity);
+
+    /**
+     * 执行全部未进行回调的回调任务
+     * @return 回调任务的响应信息
+     */
+    Map<String, Integer> execNotifyJob();
+
+    /**
+     * 进行指定 teamId 的回调任务
+     * @param teamId 拼团队伍 ID
+     * @return 回调任务的响应信息
+     */
+    Map<String, Integer> execNotifyJob(String teamId);
 }

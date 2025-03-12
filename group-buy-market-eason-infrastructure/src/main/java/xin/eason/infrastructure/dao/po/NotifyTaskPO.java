@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @TableName("notify_task")
-public class NotifyTask {
+public class NotifyTaskPO {
 
     /** 自增ID */
     private Long id;
