@@ -25,7 +25,7 @@ public class TradeLockOrderServiceTest {
     public void test_lockMarketPayOrder() {
         LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO = new LockMarketPayOrderRequestDTO();
         lockMarketPayOrderRequestDTO.setNotifyUrl("http://127.0.0.1:8080/api/v1/test/group_buy_notify");
-        lockMarketPayOrderRequestDTO.setUserId("Eason4");
+        lockMarketPayOrderRequestDTO.setUserId("Eason1");
         lockMarketPayOrderRequestDTO.setTeamId(null);
         lockMarketPayOrderRequestDTO.setActivityId(100123L);
         lockMarketPayOrderRequestDTO.setGoodsId("9890001");

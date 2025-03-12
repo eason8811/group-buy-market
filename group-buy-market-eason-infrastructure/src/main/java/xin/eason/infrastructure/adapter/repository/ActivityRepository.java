@@ -6,19 +6,24 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RBitSet;
 import org.springframework.stereotype.Component;
 import xin.eason.domain.activity.adapter.repository.IActivityRepository;
+import xin.eason.domain.activity.model.entity.UserTeamInfoEntity;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 import xin.eason.domain.activity.model.valobj.SkuVO;
-import xin.eason.infrastructure.dao.IGroupBuyActivity;
-import xin.eason.infrastructure.dao.IGroupBuyDiscount;
-import xin.eason.infrastructure.dao.IGroupBuySku;
-import xin.eason.infrastructure.dao.ISCSkuActivity;
-import xin.eason.infrastructure.dao.po.GroupBuyActivityPO;
-import xin.eason.infrastructure.dao.po.GroupBuyDiscountPO;
-import xin.eason.infrastructure.dao.po.SCSkuActivityPO;
-import xin.eason.infrastructure.dao.po.SkuPO;
+import xin.eason.domain.activity.model.valobj.TeamStatisticVO;
+import xin.eason.domain.trade.model.valobj.OrderListStatus;
+import xin.eason.domain.trade.model.valobj.OrderStatus;
+import xin.eason.infrastructure.dao.*;
+import xin.eason.infrastructure.dao.po.*;
 import xin.eason.infrastructure.dcc.DCCService;
 import xin.eason.infrastructure.redis.IRedisService;
 import xin.eason.types.exception.NoMarketConfigException;
+
+import java.time.LocalDateTime;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 活动 repository 仓储适配器接口
@@ -51,6 +56,14 @@ public class ActivityRepository implements IActivityRepository {
      * DCC 动态配置管理服务
      */
     private final DCCService dccService;
+    /**
+     * 拼团订单明细表对应 Mapper
+     */
+    private final IGroupBuyOrderList groupBuyOrderList;
+    /**
+     * 拼团订单表对应 Mapper
+     */
+    private final IGroupBuyOrder groupBuyOrder;
 
     /**
      * 根据 <b>SC</b> 获取 {@link GroupBuyActivityDiscountVO} 拼团活动及其折扣类的对象
@@ -160,5 +173,141 @@ public class ActivityRepository implements IActivityRepository {
     @Override
     public boolean cutRange(String userId) {
         return dccService.isCutRange(userId);
+    }
+
+    /**
+     * 查询用户参与的拼团队伍列表
+     *
+     * @param activityId 活动 ID
+     * @param userId     用户 ID (需要查询用户参与的拼团队伍)
+     * @param ownerCount 需要查询的队伍数量
+     * @return 拼团队伍信息列表
+     */
+    @Override
+    public List<UserTeamInfoEntity> queryUserOwnerTeamInfoList(Long activityId, String userId, Integer ownerCount) {
+        // 根据 activityId 和 userId 查询 ownerCount 条订单明细记录
+        LambdaQueryWrapper<GroupBuyOrderListPO> orderListWrapper = new LambdaQueryWrapper<>();
+        orderListWrapper.eq(GroupBuyOrderListPO::getActivityId, activityId)
+                .eq(GroupBuyOrderListPO::getUserId, userId)
+                .in(GroupBuyOrderListPO::getStatus, OrderListStatus.INIT_LOCK, OrderListStatus.PAY_COMPLETE)
+                .gt(GroupBuyOrderListPO::getEndTime, LocalDateTime.now())
+                .orderByDesc(GroupBuyOrderListPO::getId);
+        List<GroupBuyOrderListPO> orderListPOList = groupBuyOrderList.selectList(orderListWrapper);
+        if (orderListPOList == null)
+            return null;
+        orderListPOList = orderListPOList.subList(0, ownerCount);
+        List<String> teamIdList = orderListPOList.stream().map(GroupBuyOrderListPO::getTeamId).toList();
+
+        // 构造 teamId -> orderList Map用于组装数据时根据 teamId 获取订单明细
+        Map<String, GroupBuyOrderListPO> teamIdTeamInfoMap = orderListPOList.stream().collect(Collectors.toMap(GroupBuyOrderListPO::getTeamId, orderListPO -> orderListPO));
+
+        // 根据明细记录获取到的 teamId 查询拼团队伍详细信息
+        LambdaQueryWrapper<GroupBuyOrderPO> orderWrapper = new LambdaQueryWrapper<>();
+        orderWrapper.in(GroupBuyOrderPO::getTeamId, teamIdList);
+        List<GroupBuyOrderPO> orderPOList = groupBuyOrder.selectList(orderWrapper);
+
+        return orderPOList.stream()
+                .map(order ->
+                        UserTeamInfoEntity.builder()
+                                .userId(userId)
+                                .teamId(order.getTeamId())
+                                .activityId(order.getActivityId())
+                                .targetCount(order.getTargetCount())
+                                .completeCount(order.getCompleteCount())
+                                .lockCount(order.getLockCount())
+                                .validStartTime(order.getValidStartTime())
+                                .validEndTime(order.getValidEndTime())
+                                .outerOrderId(teamIdTeamInfoMap.get(order.getTeamId()).getOutTradeNo())
+                                .build()
+                )
+                .toList();
+    }
+
+    /**
+     * 随机查询用户没有参与的拼团队伍列表
+     *
+     * @param activityId  活动 ID
+     * @param userId      用户 ID
+     * @param randomCount 随机查询的数量
+     * @return 拼团队伍信息列表
+     */
+    @Override
+    public List<UserTeamInfoEntity> queryUserRamdomTeamInfoList(Long activityId, String userId, Integer randomCount) {
+        List<GroupBuyOrderListPO> orderListPOList = groupBuyOrderList.queryUserRamdomTeamInfoList(activityId, userId, randomCount * 2);
+        if (orderListPOList == null)
+            return null;
+
+        // 若列表长度大于 randomCount 则打乱数据
+        if (orderListPOList.size() >= randomCount) {
+            Collections.shuffle(orderListPOList);
+            orderListPOList = orderListPOList.subList(0, randomCount);
+        }
+
+        List<String> teamIdList = orderListPOList.stream().map(GroupBuyOrderListPO::getTeamId).toList();
+
+        // 构造 teamId -> outerOrderId Map用于组装数据时根据 teamId 获取随机一个外部订单 ID
+        /*Map<String, GroupBuyOrderListPO> teamIdTeamInfoMap = orderListPOList.stream().collect(Collectors.toMap(GroupBuyOrderListPO::getTeamId, orderListPO -> {
+            orderListPO
+        }));*/
+
+        Map<String, GroupBuyOrderListPO> teamIdTeamInfoMap = new HashMap<>();
+        orderListPOList.forEach(orderListPO -> {
+            if (teamIdTeamInfoMap.containsKey(orderListPO.getTeamId()))
+                return;
+            teamIdTeamInfoMap.put(orderListPO.getTeamId(), orderListPO);
+        });
+
+        // 根据 teamIdList 获取队伍详细信息
+        LambdaQueryWrapper<GroupBuyOrderPO> orderWrapper = new LambdaQueryWrapper<>();
+        orderWrapper.in(GroupBuyOrderPO::getTeamId, teamIdList);
+        List<GroupBuyOrderPO> orderPOList = groupBuyOrder.selectList(orderWrapper);
+
+
+        return orderPOList.stream()
+                .map(orderPO -> {
+                    GroupBuyOrderListPO groupBuyOrderListPO = teamIdTeamInfoMap.get(orderPO.getTeamId());
+                    return UserTeamInfoEntity.builder()
+                            .userId(groupBuyOrderListPO.getUserId())
+                            .teamId(orderPO.getTeamId())
+                            .activityId(orderPO.getActivityId())
+                            .targetCount(orderPO.getTargetCount())
+                            .completeCount(orderPO.getCompleteCount())
+                            .lockCount(orderPO.getLockCount())
+                            .validStartTime(orderPO.getValidStartTime())
+                            .validEndTime(orderPO.getValidEndTime())
+                            .outerOrderId(groupBuyOrderListPO.getOutTradeNo())
+                            .build();
+                })
+                .toList();
+    }
+
+    /**
+     * 统计指定 activityId 活动内的拼团队伍数据
+     *
+     * @param activityId 活动 ID
+     * @return 拼团队伍数据值对象
+     */
+    @Override
+    public TeamStatisticVO queryTeamStatistic(Long activityId) {
+        // 查询开团的总队伍数 (属于该活动的, 状态不为失败的队伍)
+        LambdaQueryWrapper<GroupBuyOrderPO> totalTeamCountWrapper = new LambdaQueryWrapper<>();
+        totalTeamCountWrapper.eq(GroupBuyOrderPO::getActivityId, activityId).ne(GroupBuyOrderPO::getStatus, OrderStatus.FAIL);
+        Long totalTeamCount = groupBuyOrder.selectCount(totalTeamCountWrapper);
+
+        // 查询完成拼团的队伍数 (属于该活动的, 状态为完成的队伍)
+        LambdaQueryWrapper<GroupBuyOrderPO> totalCompleteTeamCountWrapper = new LambdaQueryWrapper<>();
+        totalCompleteTeamCountWrapper.eq(GroupBuyOrderPO::getActivityId, activityId).eq(GroupBuyOrderPO::getStatus, OrderStatus.COMPLETE);
+        Long totalCompleteTeamCount = groupBuyOrder.selectCount(totalCompleteTeamCountWrapper);
+
+        // 查询参与拼团的总人数 (属于该活动的拼团订单明细数量, 状态不为退单的用户  去重)
+        LambdaQueryWrapper<GroupBuyOrderListPO> totalTeamUserCountWrapper = new LambdaQueryWrapper<>();
+        totalTeamUserCountWrapper.eq(GroupBuyOrderListPO::getActivityId, activityId).ne(GroupBuyOrderListPO::getStatus, OrderListStatus.CLOSE);
+        Long totalTeamUserCount = groupBuyOrderList.queryTotalTeamUserCount(totalTeamUserCountWrapper);
+
+        return TeamStatisticVO.builder()
+                .totalTeamCount(totalTeamCount)
+                .totalCompleteTeamCount(totalCompleteTeamCount)
+                .totalTeamUserCount(totalTeamUserCount)
+                .build();
     }
 }

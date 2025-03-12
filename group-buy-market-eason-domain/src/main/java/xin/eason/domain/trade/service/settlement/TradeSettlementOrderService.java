@@ -89,7 +89,7 @@ public class TradeSettlementOrderService implements ITradeSettlementOrderService
                 .source(orderSettlementEntity.getSource())
                 .channel(orderSettlementEntity.getChannel())
                 .userId(orderSettlementEntity.getUserId())
-                .outTradeNo(orderSettlementEntity.getOuterOrderId())
+                .outerOrderId(orderSettlementEntity.getOuterOrderId())
                 .teamId(groupBuyOrderAggregate.getPayOrderTeamEntity().getTeamId())
                 .activityId(groupBuyOrderAggregate.getPayOrderActivityEntity().getActivityId())
                 .build();

@@ -2,6 +2,8 @@ package xin.eason.api;
 
 import xin.eason.api.dto.LockMarketPayOrderRequestDTO;
 import xin.eason.api.dto.LockMarketPayOrderResponseDTO;
+import xin.eason.api.dto.SettlementOrderRequestDTO;
+import xin.eason.api.dto.SettlementOrderResponseDTO;
 import xin.eason.api.response.Result;
 
 /**
@@ -59,4 +61,12 @@ public interface IMarketTradeController {
      * @return 锁定拼团订单信息
      */
     Result<LockMarketPayOrderResponseDTO> lockMarketPayOrder(LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO);
+
+    /**
+     * <p>根据 订单SC值, 用户 ID, 外部订单 ID, 支付时间 进行订单结算</p>
+     *
+     * @param settlementOrderRequestDTO 订单结算请求数据传输对象
+     * @return 订单结算响应数据传输对象
+     */
+    Result<SettlementOrderResponseDTO> settleMarketPayOrder(SettlementOrderRequestDTO settlementOrderRequestDTO);
 }

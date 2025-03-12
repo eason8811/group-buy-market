@@ -1,4 +1,4 @@
-package xin.eason.domain.trade.model.entity;
+package xin.eason.api.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,13 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 订单结算成功实体
+ * 订单结算响应数据传输对象
  */
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderSettlementSuccessEntity {
+public class SettlementOrderResponseDTO {
     /** 渠道 */
     private String source;
     /** 来源 */

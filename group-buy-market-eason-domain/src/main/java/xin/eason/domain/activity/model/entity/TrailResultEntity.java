@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -43,4 +44,6 @@ public class TrailResultEntity {
     private Boolean isVisible;
     /** 是否可参与进团 */
     private Boolean isEnable;
+    /** 活动配置信息 */
+    private GroupBuyActivityDiscountVO groupBuyActivityDiscountVO;
 }

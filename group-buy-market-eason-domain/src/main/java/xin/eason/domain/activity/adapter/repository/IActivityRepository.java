@@ -1,7 +1,11 @@
 package xin.eason.domain.activity.adapter.repository;
 
+import xin.eason.domain.activity.model.entity.UserTeamInfoEntity;
 import xin.eason.domain.activity.model.valobj.GroupBuyActivityDiscountVO;
 import xin.eason.domain.activity.model.valobj.SkuVO;
+import xin.eason.domain.activity.model.valobj.TeamStatisticVO;
+
+import java.util.List;
 
 /**
  * 活动 repository 仓储适配器接口
@@ -44,4 +48,30 @@ public interface IActivityRepository {
      * @return 服务切量情况
      */
     boolean cutRange(String userId);
+
+    /**
+     * 查询用户参与的拼团队伍列表
+     *
+     * @param activityId 活动 ID
+     * @param userId     用户 ID (需要查询用户参与的拼团队伍)
+     * @param ownerCount 需要查询的队伍数量
+     * @return 拼团队伍信息列表
+     */
+    List<UserTeamInfoEntity> queryUserOwnerTeamInfoList(Long activityId, String userId, Integer ownerCount);
+
+    /**
+     * 随机查询用户没有参与的拼团队伍列表
+     * @param activityId 活动 ID
+     * @param userId 用户 ID
+     * @param randomCount 随机查询的数量
+     * @return 拼团队伍信息列表
+     */
+    List<UserTeamInfoEntity> queryUserRamdomTeamInfoList(Long activityId, String userId, Integer randomCount);
+
+    /**
+     * 统计指定 activityId 活动内的拼团队伍数据
+     * @param activityId 活动 ID
+     * @return 拼团队伍数据值对象
+     */
+    TeamStatisticVO queryTeamStatistic(Long activityId);
 }
