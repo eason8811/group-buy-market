@@ -13,6 +13,7 @@ import xin.eason.domain.activity.model.entity.UserTeamInfoEntity;
 import xin.eason.domain.activity.model.valobj.TeamStatisticVO;
 import xin.eason.domain.activity.service.IIndexGroupBuyMarketService;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Slf4j
@@ -56,7 +57,7 @@ public class MarketIndexController implements IMarketIndexService {
             List<GoodsMarketResponseDTO.Team> teamList = userTeamInfoEntityList.stream()
                     .map(userTeamInfoEntity -> {
                         GoodsMarketResponseDTO.Team teamInfo = GoodsMarketResponseDTO.Team.builder()
-                                .userId(goodsMarketRequestDTO.getUserId())
+                                .userId(userTeamInfoEntity.getUserId())
                                 .teamId(userTeamInfoEntity.getTeamId())
                                 .activityId(userTeamInfoEntity.getActivityId())
                                 .targetCount(userTeamInfoEntity.getTargetCount())
@@ -95,6 +96,12 @@ public class MarketIndexController implements IMarketIndexService {
                                     .build()
                     )
                     .build();
+            if (!trailResultEntity.getIsVisible()) {
+                // 活动不可见则直接返回原价
+                BigDecimal originalPrice = responseDTO.getGoods().getOriginalPrice();
+                responseDTO.getGoods().setDiscountPrice(new BigDecimal("0.00"));
+                responseDTO.getGoods().setPayPrice(originalPrice);
+            }
             log.info("拼团配置查询完成!");
             return Result.success(responseDTO);
         } catch (Exception e) {

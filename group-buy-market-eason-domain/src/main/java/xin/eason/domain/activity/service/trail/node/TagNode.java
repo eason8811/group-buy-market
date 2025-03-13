@@ -120,10 +120,6 @@ public class TagNode extends AbstractGroupBuyMarketSupport {
     public StrategyHandler<MarketProductEntity, DefaultActivityStrategyFactory.DynamicContext, TrailResultEntity> get(MarketProductEntity requestParam, DefaultActivityStrategyFactory.DynamicContext dynamicContext) throws Exception {
         if (dynamicContext.getException() != null)
             return errorNode;
-        if (!dynamicContext.getIsVisible() || !dynamicContext.getIsParticipable()){
-            // 不可见或不可参与则直接流转向收尾节点
-            return endNode;
-        }
         return marketNode;
     }
 }

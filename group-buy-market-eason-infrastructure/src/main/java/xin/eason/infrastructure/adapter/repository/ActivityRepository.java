@@ -193,8 +193,8 @@ public class ActivityRepository implements IActivityRepository {
                 .gt(GroupBuyOrderListPO::getEndTime, LocalDateTime.now())
                 .orderByDesc(GroupBuyOrderListPO::getId);
         List<GroupBuyOrderListPO> orderListPOList = groupBuyOrderList.selectList(orderListWrapper);
-        if (orderListPOList == null)
-            return null;
+        if (orderListPOList == null || orderListPOList.isEmpty())
+            return Collections.emptyList();
         orderListPOList = orderListPOList.subList(0, ownerCount);
         List<String> teamIdList = orderListPOList.stream().map(GroupBuyOrderListPO::getTeamId).toList();
 
@@ -234,8 +234,8 @@ public class ActivityRepository implements IActivityRepository {
     @Override
     public List<UserTeamInfoEntity> queryUserRamdomTeamInfoList(Long activityId, String userId, Integer randomCount) {
         List<GroupBuyOrderListPO> orderListPOList = groupBuyOrderList.queryUserRamdomTeamInfoList(activityId, userId, randomCount * 2);
-        if (orderListPOList == null)
-            return null;
+        if (orderListPOList == null || orderListPOList.isEmpty())
+            return Collections.emptyList();
 
         // 若列表长度大于 randomCount 则打乱数据
         if (orderListPOList.size() >= randomCount) {
@@ -246,10 +246,6 @@ public class ActivityRepository implements IActivityRepository {
         List<String> teamIdList = orderListPOList.stream().map(GroupBuyOrderListPO::getTeamId).toList();
 
         // 构造 teamId -> outerOrderId Map用于组装数据时根据 teamId 获取随机一个外部订单 ID
-        /*Map<String, GroupBuyOrderListPO> teamIdTeamInfoMap = orderListPOList.stream().collect(Collectors.toMap(GroupBuyOrderListPO::getTeamId, orderListPO -> {
-            orderListPO
-        }));*/
-
         Map<String, GroupBuyOrderListPO> teamIdTeamInfoMap = new HashMap<>();
         orderListPOList.forEach(orderListPO -> {
             if (teamIdTeamInfoMap.containsKey(orderListPO.getTeamId()))

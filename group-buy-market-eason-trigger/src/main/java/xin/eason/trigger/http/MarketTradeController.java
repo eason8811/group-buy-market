@@ -153,6 +153,17 @@ public class MarketTradeController implements IMarketTradeController {
                     .channel(channel)
                     .build();
             TrailResultEntity trailResultEntity = marketService.indexTrail(marketProductEntity);
+            if (!trailResultEntity.getIsVisible()){
+                // 不可见, 直接返回失败
+                log.error("活动 activityId: {} 对用户 userId: {} 不可见!", activityId, userId);
+                return Result.error("活动 activityId: " + activityId + " 对用户 userId: " + userId + " 不可见!");
+            }
+
+            if (!trailResultEntity.getIsEnable()) {
+                // 不可参与, 直接返回失败
+                log.error("活动 activityId: {} 对用户 userId: {} 不可参与!", activityId, userId);
+                return Result.error("活动 activityId: " + activityId + " 对用户 userId: " + userId + " 不可参与!");
+            }
 
             // 锁定拼团订单 (事务)
             log.info("正在锁定拼团订单...");
