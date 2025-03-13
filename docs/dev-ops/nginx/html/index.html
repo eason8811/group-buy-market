@@ -46,7 +46,7 @@
         <br/>
         <p id="paymentAmount" style="color:red;"></p>
         <img src="./images/sku-13811216-04.png" alt="支付二维码" class="qr-code">
-        <p id="outTradeNo"></p>
+        <p id="outerOrderId"></p>
         <div class="button-group">
             <button id="cancelPayment">取消支付</button>
             <button id="completePayment">支付完成</button>
@@ -67,7 +67,7 @@
         }
 
         // 定义交易单号，如果交易单号不为空，则当前用户已参与拼团交易
-        let outTradeNo = "";
+        let outerOrderId = "";
 
         // 请求接口数据
         fetch(baseUrl + '/api/v1/gbm/index/query_group_buy_market_config', {
@@ -109,7 +109,7 @@
                         const remaining = team.targetCount - team.lockCount;
                         // 判断当前用户ID是否为登录用户ID
                         if (userId == team.userId) {
-                            outTradeNo = team.outTradeNo;
+                            outerOrderId = team.outerOrderId;
                         }
 
                         groupList.innerHTML += `
@@ -142,12 +142,12 @@
                     btn.addEventListener('click', function () {
 
                         // 如果有值，则直接展示支付按钮
-                        if (outTradeNo) {
+                        if (outerOrderId) {
                             // 显示支付弹窗
                             document.getElementById('paymentAmount').textContent =
                                 `￥${this.dataset.price}`;
-                            document.getElementById('outTradeNo').textContent =
-                                outTradeNo;
+                            document.getElementById('outerOrderId').textContent =
+                                outerOrderId;
                             document.getElementById('paymentModal').style.display = 'block';
                             return;
                         }
@@ -160,7 +160,7 @@
                             teamId = userInfo.dataset.teamid;
                         }
 
-                        outTradeNo = generateRandomNumber(12);
+                        outerOrderId = generateRandomNumber(12);
 
                         // 构造请求数据（假设activityId和goodsId从按钮dataset获取）
                         const postData = {
@@ -170,7 +170,7 @@
                             goodsId: "9890001",
                             source: "s01",
                             channel: "c01",
-                            outTradeNo: outTradeNo,
+                            outerOrderId: outerOrderId,
                             notifyUrl: baseUrl + "/api/v1/test/group_buy_notify"
                         };
 
@@ -184,18 +184,18 @@
                         })
                             .then(response => response.json())
                             .then(res => {
-                                if (res.code !== '0000') {
+                                if (res.code !== 1) {
                                     // 失败，清空交易ID
-                                    outTradeNo = null;
-                                    alert(res.code + "：" + res.info);
+                                    outerOrderId = null;
+                                    alert(res.code + "：" + res.msg);
                                     return;
                                 }
 
                                 // 显示支付弹窗
                                 document.getElementById('paymentAmount').textContent =
                                     `￥${this.dataset.price}`;
-                                document.getElementById('outTradeNo').textContent =
-                                    outTradeNo;
+                                document.getElementById('outerOrderId').textContent =
+                                    outerOrderId;
                                 document.getElementById('paymentModal').style.display = 'block';
                             })
                             .catch(error => {
@@ -259,12 +259,26 @@
                 .substr(0, 19);
 
             // 构造请求参数
+            let currentTime = new Date();
+            let payTimeObj = {
+                'year': currentTime.getFullYear().toString(),
+                'month': (currentTime.getMonth() + 1).toString().padStart(2, '0'),
+                'date': currentTime.getDate().toString().padStart(2, '0'),
+                'hour': currentTime.getHours().toString().padStart(2, '0'),
+                'min': currentTime.getMinutes().toString().padStart(2, '0'),
+                'second': currentTime.getSeconds().toString().padStart(2, '0'),
+
+                getFormatedTime: function () {
+                    return this.year + "-" + this.month + "-" + this.date + " " + this.hour + ":" + this.min + ":" + this.second;
+                }
+            }
+
             const postData = {
                 source: "s01",       // 保持与锁定订单时一致
                 channel: "c01",      // 保持与锁定订单时一致
                 userId: userId,
-                outTradeNo: outTradeNo,
-                outTradeTime: new Date()
+                outerOrderId: outerOrderId,
+                payTime: payTimeObj.getFormatedTime()
             };
 
             // 调用结算接口
@@ -277,12 +291,12 @@
             })
                 .then(response => response.json())
                 .then(res => {
-                    outTradeNo = null;
-                    if (res.code === '0000') {
+                    outerOrderId = null;
+                    if (res.code === 1) {
                         alert('支付&结算成功！');
                         window.location.reload(); // 支付成功后刷新页面
                     } else {
-                        alert(`支付&结算失败：${res.info || '未知错误'}`);
+                        alert(`支付&结算失败：${res.msg || '未知错误'}`);
                     }
                 })
                 .catch(error => {

@@ -21,7 +21,7 @@ import xin.eason.domain.trade.service.ITradeSettlementOrderService;
 import java.time.LocalDateTime;
 
 @Slf4j
-@CrossOrigin
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/api/v1/gbm/trade")
 @RequiredArgsConstructor
@@ -105,7 +105,7 @@ public class MarketTradeController implements IMarketTradeController {
 
             log.info("正在进行锁定订单, userId: {}, outerOrderId: {}", userId, outerOrderId);
             if (StringUtils.isBlank(userId) || StringUtils.isBlank(source) || StringUtils.isBlank(channel) || StringUtils.isBlank(goodsId) || null == activityId || StringUtils.isBlank(notifyUrl)) {
-                log.error("参数非法!");
+                log.error("参数非法! param: {}", lockMarketPayOrderRequestDTO);
                 return Result.error("参数非法");
             }
 
@@ -232,7 +232,7 @@ public class MarketTradeController implements IMarketTradeController {
             log.info("营销交易组队结算开始, userId: {}, outTradeNo: {}", userId, outerOrderId);
 
             if (StringUtils.isBlank(userId) || StringUtils.isBlank(source) || StringUtils.isBlank(channel) || StringUtils.isBlank(outerOrderId) || null == payTime) {
-                log.error("参数非法!");
+                log.error("参数非法! param: {}", settlementOrderRequestDTO);
                 return Result.error("参数非法!");
             }
             // 进行订单结算服务
