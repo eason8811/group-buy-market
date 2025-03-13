@@ -90,7 +90,7 @@ public class MarketTradeController implements IMarketTradeController {
      * @return 锁定拼团订单信息
      */
     @Override
-    @PostMapping("/lock")
+    @PostMapping("/lock_market_pay_order")
     public Result<LockMarketPayOrderResponseDTO> lockMarketPayOrder(@RequestBody LockMarketPayOrderRequestDTO lockMarketPayOrderRequestDTO) {
         try {
             // 查询是否有未支付订单

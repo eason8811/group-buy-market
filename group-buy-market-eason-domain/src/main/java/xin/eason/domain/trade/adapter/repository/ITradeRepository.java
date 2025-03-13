@@ -113,7 +113,7 @@ public interface ITradeRepository {
     int updateNotifyStatusRetry(NotifyTaskEntity notifyTaskEntity);
 
     /**
-     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败, 连带修改队伍中所有用户的订单明细状态为 超时关单
      *
      * @param currentTime 当前时间
      * @return 修改成功的 teamId 列表

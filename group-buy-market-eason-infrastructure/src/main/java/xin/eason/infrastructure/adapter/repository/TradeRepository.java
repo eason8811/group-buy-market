@@ -424,12 +424,13 @@ public class TradeRepository implements ITradeRepository {
     }
 
     /**
-     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败, 连带修改队伍中所有用户的订单明细状态为 超时关单
      *
      * @param currentTime 当前时间
      * @return 修改成功的 teamId 列表
      */
     @Override
+    @Transactional
     public List<String> setInvalidTeamToFailed(LocalDateTime currentTime) {
         // 获取不在合法时间内 且 状态为正在拼团中 的队伍的 teamId
         LambdaQueryWrapper<GroupBuyOrderPO> queryWrapper = new LambdaQueryWrapper<>();
@@ -442,11 +443,17 @@ public class TradeRepository implements ITradeRepository {
             log.info("暂无需要修改状态为 失败 的队伍!");
             return teamIdList;
         }
-        LambdaUpdateWrapper<GroupBuyOrderPO> updateWrapper = new LambdaUpdateWrapper<>();
-        updateWrapper.set(GroupBuyOrderPO::getStatus, OrderStatus.FAIL).in(GroupBuyOrderPO::getTeamId, teamIdList);
-        int updateRowCount = groupBuyOrder.update(updateWrapper);
+        LambdaUpdateWrapper<GroupBuyOrderPO> orderUpdateWrapper = new LambdaUpdateWrapper<>();
+        orderUpdateWrapper.set(GroupBuyOrderPO::getStatus, OrderStatus.FAIL).in(GroupBuyOrderPO::getTeamId, teamIdList);
+        int updateRowCount = groupBuyOrder.update(orderUpdateWrapper);
         if (updateRowCount != teamIdList.size())
-            throw new UpdateAmountZeroException("设置不合法队伍状态为失败过程出现异常! 更改行数与查询到的 teamId 数不符! teamIdList : " + teamIdList);
+            throw new UpdateAmountZeroException("设置不合法队伍状态为失败过程出现异常! group_buy_order表 更改行数与查询到的 teamId 数不符! teamIdList : " + teamIdList);
+
+        LambdaUpdateWrapper<GroupBuyOrderListPO> orderListUpdateWrapper = new LambdaUpdateWrapper<>();
+        orderListUpdateWrapper.in(GroupBuyOrderListPO::getTeamId, teamIdList).set(GroupBuyOrderListPO::getStatus, OrderListStatus.CLOSE);
+        updateRowCount = groupBuyOrderList.update(orderListUpdateWrapper);
+        if (updateRowCount == 0)
+            throw new UpdateAmountZeroException("设置不合法队伍状态为失败过程出现异常! group_buy_order_list表 更改行数为 0");
         return teamIdList;
     }
 }
