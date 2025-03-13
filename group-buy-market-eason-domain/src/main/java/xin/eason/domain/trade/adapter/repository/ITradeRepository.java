@@ -3,6 +3,7 @@ package xin.eason.domain.trade.adapter.repository;
 import xin.eason.domain.trade.model.aggregate.GroupBuyOrderAggregate;
 import xin.eason.domain.trade.model.entity.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -110,4 +111,12 @@ public interface ITradeRepository {
      * @return 受修改的行数
      */
     int updateNotifyStatusRetry(NotifyTaskEntity notifyTaskEntity);
+
+    /**
+     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     *
+     * @param currentTime 当前时间
+     * @return 修改成功的 teamId 列表
+     */
+    List<String> setInvalidTeamToFailed(LocalDateTime currentTime);
 }

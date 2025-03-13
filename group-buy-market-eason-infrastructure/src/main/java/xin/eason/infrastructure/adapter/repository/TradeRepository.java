@@ -24,6 +24,7 @@ import xin.eason.infrastructure.dao.po.NotifyTaskPO;
 import xin.eason.infrastructure.dcc.DCCService;
 import xin.eason.types.exception.UpdateAmountZeroException;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 
@@ -420,5 +421,32 @@ public class TradeRepository implements ITradeRepository {
         LambdaQueryWrapper<NotifyTaskPO> wrapper = new LambdaQueryWrapper<>();
         wrapper.eq(NotifyTaskPO::getTeamId, notifyTaskEntity.getTeamId());
         return notifyTaskMapper.updateNotifyStatusRetry(wrapper);
+    }
+
+    /**
+     * 根据当前时间查询状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     *
+     * @param currentTime 当前时间
+     * @return 修改成功的 teamId 列表
+     */
+    @Override
+    public List<String> setInvalidTeamToFailed(LocalDateTime currentTime) {
+        // 获取不在合法时间内 且 状态为正在拼团中 的队伍的 teamId
+        LambdaQueryWrapper<GroupBuyOrderPO> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.lt(GroupBuyOrderPO::getValidEndTime, currentTime).eq(GroupBuyOrderPO::getStatus, OrderStatus.GROUPING);
+        List<GroupBuyOrderPO> invalidOrderPOList = groupBuyOrder.selectList(queryWrapper);
+        List<String> teamIdList = invalidOrderPOList.stream().map(GroupBuyOrderPO::getTeamId).toList();
+
+        // 将这些 teamId 的队伍状态修改为 失败
+        if (teamIdList.isEmpty()) {
+            log.info("暂无需要修改状态为 失败 的队伍!");
+            return teamIdList;
+        }
+        LambdaUpdateWrapper<GroupBuyOrderPO> updateWrapper = new LambdaUpdateWrapper<>();
+        updateWrapper.set(GroupBuyOrderPO::getStatus, OrderStatus.FAIL).in(GroupBuyOrderPO::getTeamId, teamIdList);
+        int updateRowCount = groupBuyOrder.update(updateWrapper);
+        if (updateRowCount != teamIdList.size())
+            throw new UpdateAmountZeroException("设置不合法队伍状态为失败过程出现异常! 更改行数与查询到的 teamId 数不符! teamIdList : " + teamIdList);
+        return teamIdList;
     }
 }

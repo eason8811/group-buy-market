@@ -122,6 +122,18 @@ public class TradeSettlementOrderService implements ITradeSettlementOrderService
     }
 
     /**
+     * 根据当前时间检测状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     *
+     * @param currentTime 当前时间
+     * @return 修改成功的 teamId 列表
+     */
+    @Override
+    public List<String> setInvalidTeamToFailed(LocalDateTime currentTime) {
+        // 查询当前已经过期但是状态不为 成功 的队伍, 并将其状态修改为 失败
+        return tradeRepository.setInvalidTeamToFailed(currentTime);
+    }
+
+    /**
      * 根据 notifyTask 中的相关信息执行回调任务
      *
      * @param notifyTaskEntityList 回调实体列表

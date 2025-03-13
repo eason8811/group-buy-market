@@ -3,6 +3,8 @@ package xin.eason.domain.trade.service;
 import xin.eason.domain.trade.model.entity.OrderSettlementEntity;
 import xin.eason.domain.trade.model.entity.OrderSettlementSuccessEntity;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -30,4 +32,12 @@ public interface ITradeSettlementOrderService {
      * @return 回调任务的响应信息
      */
     Map<String, Integer> execNotifyJob(String teamId);
+
+    /**
+     * 根据当前时间检测状态 不为成功 的队伍是否存在, 如果存在, 则将其状态更改为 失败
+     *
+     * @param currentTime 当前时间
+     * @return 修改成功的 teamId 列表
+     */
+    List<String> setInvalidTeamToFailed(LocalDateTime currentTime);
 }
