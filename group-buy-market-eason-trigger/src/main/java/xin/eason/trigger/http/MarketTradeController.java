@@ -72,14 +72,18 @@ public class MarketTradeController implements IMarketTradeController {
      * <td><b>字段名</b></td>
      * <td>orderId</td>
      * <td>teamId</td>
+     * <td>originalPrice</td>
      * <td>discountPrice</td>
+     * <td>payPrice</td>
      * <td>tradeOrderStatus</td>
      * </tr>
      * <tr>
      * <td><b>字段含义</b></td>
      * <td>预购订单 ID</td>
      * <td>生成 (传入) 的 ID</td>
+     * <td>商品原始价格</td>
      * <td>商品折扣价格</td>
+     * <td>商品支付价格</td>
      * <td>订单状态</td>
      * </tr>
      * </tbody>
@@ -117,7 +121,9 @@ public class MarketTradeController implements IMarketTradeController {
                 log.info("userId: {}, outerOrderId: {} 已有订单, 订单处于初始锁定状态, 直接返回订单信息: {}", userId, outerOrderId, payOrderEntity);
                 return Result.success(
                         LockMarketPayOrderResponseDTO.builder()
+                                .originalPrice(payOrderEntity.getOriginalPrice())
                                 .discountPrice(payOrderEntity.getDiscountPrice())
+                                .payPrice(payOrderEntity.getPayPrice())
                                 .orderId(payOrderEntity.getOrderId())
                                 .teamId(teamId)
                                 .tradeOrderStatus(payOrderEntity.getOrderListStatus().getCode())
@@ -203,7 +209,9 @@ public class MarketTradeController implements IMarketTradeController {
             LockMarketPayOrderResponseDTO responseDTO = LockMarketPayOrderResponseDTO.builder()
                     .orderId(groupBuyOrderAggregateRes.getPayOrderEntity().getOrderId())
                     .teamId(groupBuyOrderAggregateRes.getPayOrderTeamEntity().getTeamId())
+                    .originalPrice(groupBuyOrderAggregateRes.getPayOrderEntity().getOriginalPrice())
                     .discountPrice(groupBuyOrderAggregateRes.getPayOrderDiscountEntity().getDiscountPrice())
+                    .payPrice(groupBuyOrderAggregateRes.getPayOrderEntity().getPayPrice())
                     .tradeOrderStatus(groupBuyOrderAggregateRes.getPayOrderEntity().getOrderListStatus().getCode())
                     .build();
             log.info("拼团订单内部 ID: {}, 外部订单 ID: {}, userId: {} 锁定优惠成功! 拼团订单信息: {}", responseDTO.getOrderId(), outerOrderId, userId, responseDTO);

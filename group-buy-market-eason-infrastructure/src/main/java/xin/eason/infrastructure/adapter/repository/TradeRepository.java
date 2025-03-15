@@ -73,6 +73,7 @@ public class TradeRepository implements ITradeRepository {
                 .orderId(groupBuyOrderListPO.getOrderId())
                 .orderListStatus(groupBuyOrderListPO.getStatus())
                 .discountPrice(groupBuyOrderListPO.getDeductionPrice())
+                .payPrice(groupBuyOrderListPO.getPayPrice())
                 .build();
     }
 
@@ -161,6 +162,7 @@ public class TradeRepository implements ITradeRepository {
                 .channel(discountEntity.getChannel())
                 .originalPrice(discountEntity.getOriginalPrice())
                 .deductionPrice(discountEntity.getDiscountPrice())
+                .payPrice(payOrderEntity.getPayPrice())
                 .status(payOrderEntity.getOrderListStatus())
                 .outTradeNo(groupBuyOrderAggregate.getOuterOrderId())
                 .bizId(activityEntity.getActivityId() + "_" + groupBuyOrderAggregate.getUserId() + "_" + (groupBuyOrderAggregate.getJoinTimes() + 1))
@@ -249,7 +251,6 @@ public class TradeRepository implements ITradeRepository {
             rowCount = groupBuyOrder.update(updateOrderStatusWrapper);
             if (rowCount != 1)
                 throw new UpdateAmountZeroException("group_buy_order 表更新订单状态, 受影响表记录为 0 !");
-
 
             // 获取该 teamId 在 group_buy_order_list 表中所有的 outerOrderId, 装配 notifyEntity
             LambdaQueryWrapper<GroupBuyOrderListPO> queryWrapper = new LambdaQueryWrapper<>();

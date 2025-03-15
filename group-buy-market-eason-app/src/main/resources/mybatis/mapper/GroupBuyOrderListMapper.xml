@@ -18,6 +18,7 @@
                channel,
                original_price,
                deduction_price,
+               pay_price,
                status,
                out_trade_no,
                out_trade_time,

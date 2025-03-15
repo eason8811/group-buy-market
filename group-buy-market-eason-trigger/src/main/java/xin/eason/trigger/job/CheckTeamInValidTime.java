@@ -24,7 +24,7 @@ public class CheckTeamInValidTime {
     /**
      * 每隔 30 秒检查是否有队伍的有效时间已经不在当前时间内, 如有, 且其状态不为成功, 则修改为失败
      */
-    @Scheduled(cron = "0/30 * * * * ? ")
+    @Scheduled(cron = "0 * * * * ? ")
     public void setInvalidTeamToFailed() {
         try {
             LocalDateTime currentTime = LocalDateTime.now();

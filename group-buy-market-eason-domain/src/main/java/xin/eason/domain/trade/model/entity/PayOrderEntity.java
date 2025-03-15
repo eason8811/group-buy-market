@@ -22,6 +22,10 @@ public class PayOrderEntity {
      */
     private String orderId;
     /**
+     * 原始价格
+     */
+    private BigDecimal originalPrice;
+    /**
      * 折扣金额
      */
     private BigDecimal discountPrice;

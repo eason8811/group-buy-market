@@ -24,9 +24,17 @@ public class LockMarketPayOrderResponseDTO {
      */
     private String teamId;
     /**
+     * 原始价格
+     */
+    private BigDecimal originalPrice;
+    /**
      * 折扣价格
      */
     private BigDecimal discountPrice;
+    /**
+     * 支付价格
+     */
+    private BigDecimal payPrice;
     /**
      * 预购订单状态
      */
