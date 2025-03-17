@@ -51,6 +51,8 @@ public class TagsService implements ITagsService{
             add("Eason8");
             add("Eason9");
             add("Eason10");
+            add("okOpN7JIwbubh-y9lX9EQWpEwGfk");
+            add("okOpN7GFO9l7L1NrrDNSguQAWDfY");
         }};
 
         // 将 userId 信息写入 crowd_tags_detail 表

@@ -79,6 +79,7 @@ public class MarketIndexController implements IMarketIndexService {
 
             // 组装返回数据
             GoodsMarketResponseDTO responseDTO = GoodsMarketResponseDTO.builder()
+                    .activityId(activityId)
                     .goods(
                             GoodsMarketResponseDTO.Goods.builder()
                                     .goodsId(trailResultEntity.getGoodsId())
