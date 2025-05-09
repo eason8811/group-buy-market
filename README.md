@@ -1,10 +1,32 @@
-# xfg-frame-archetype - DDD 脚手架 - @小傅哥 v2.2
+# 拼团营销交易平台系统
 
-- docker 使用文档：[https://bugstack.cn/md/road-map/docker.html](https://bugstack.cn/md/road-map/docker.html)
-- DDD 教程；
-  - [DDD 概念理论](https://bugstack.cn/md/road-map/ddd-guide-01.html)
-  - [DDD 建模方法](https://bugstack.cn/md/road-map/ddd-guide-02.html)
-  - [DDD 工程模型](https://bugstack.cn/md/road-map/ddd-guide-03.html)
-  - [DDD 架构设计](https://bugstack.cn/md/road-map/ddd.html)
-  - [DDD 建模案例](https://bugstack.cn/md/road-map/ddd-model.html)
+## **项目介绍**  
+该系统基于领域驱动设计（DDD）构建，是一套支持拼团折扣营销策略的交易系统，旨在激活沉眠用户、提升转化率并节省推广成本。系统核心功能覆盖拼团活动优惠试算、用户拼团锁单、拼团结算、支付回调等全流程，同时支持用户标签管理与动态规则过滤，实现灵活的个性化营销配置。
 
+---
+
+## **核心技术栈**
+- **后端框架：** Spring Boot、MyBatis
+- **数据库与中间件：** MySQL、Redis（Bitmap/Stream/TimeSeries）、RabbitMQ
+- **系统架构与部署：** Docker 容器化、DDD 分层设计
+
+---
+
+## **项目亮点**
+- **领域建模与架构设计：**  
+  基于 DDD 的四层建模方法，划分活动域、人群域、交易域三大核心领域模型，结合领域事件和命令模式，构建了完整的拼团营销业务流程框架，确保业务扩展的灵活性与一致性。
+
+- **优惠规则动态编排与异步执行：**  
+  通过组合规则树实现页面黑名单、活动优惠试算等流程的动态策略组合，内部通过 `CompletableFuture` 实现并发编排与延迟加载，提升系统响应能力和计算效率。
+
+- **动态定时调度与流式数据处理：**  
+  利用 Spring Scheduling 与 Redis Pub/Sub 机制实现拼团到期与定时触发事件管理，结合 Redis Stream 处理用户参与行为流数据，借助 Redis TimeSeries 进行指标分析，并通过滑动窗口算法支持拼团行为的弹性伸缩管控。
+
+- **人群标签系统与 Bitmap 限制：**  
+  构建人群标签体系，对用户行为进行标签化归类，通过 Redis Bitmap 精准控制活动可见性与用户拼团资格限制，实现个性化活动投放。
+
+- **拼团主链维护与合规校验：**  
+  设计拼团主链结构以维护拼团发起与参与的上下文，校验拼团的合法性与最终成团的有效性，提升用户体验与风控能力。
+
+- **高可用异步通知机制：**  
+  引入 RabbitMQ 实现支付成功后的异步通知与拼团状态联动，支持消息重试、死信队列与幂等消费逻辑，确保业务流程稳定可靠。
